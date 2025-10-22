@@ -34,6 +34,7 @@ const fetchAuth = createServerFn({ method: 'GET' }).handler(async () => {
   const token = getCookie(sessionCookieName)
   return {
     userId: session?.user.id,
+    username: session?.user.name,
     token,
   }
 })
@@ -68,14 +69,14 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
   beforeLoad: async (ctx) => {
     // all queries, mutations and action made with TanStack Query will be
     // authenticated by an identity token.
-    const { userId, token } = await fetchAuth()
+    const { userId, username, token } = await fetchAuth()
 
     // During SSR only (the only time serverHttpClient exists),
     // set the auth token to make HTTP queries with.
     if (token) {
       ctx.context.convexQueryClient.serverHttpClient?.setAuth(token)
     }
-    return { userId, token }
+    return { userId, username, token }
   },
   shellComponent: RootDocument,
 })
