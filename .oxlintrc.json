@@ -1,0 +1,18 @@
+{
+    "plugins": [
+        "import",
+        "typescript",
+    ],
+    "settings": {},
+    "rules": {
+        "eqeqeq": "warn",
+        "import/no-cycle": "error",
+        "eslint/no-unused-vars": "error",
+        "eslint/semi": "error",
+        "default-case-last": "error",
+        "default-param-last": "error",
+        "prefer-template": "error",
+        "unicorn/prefer-at": "error",
+        "unicorn/no-useless-promise-resolve-reject": "error"
+    }
+}
