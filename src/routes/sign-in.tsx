@@ -1,4 +1,4 @@
-import { SignInWithPassword } from '@/components/auth/SignInWithPassword'
+import { SignInFormPassword } from '@/components/auth/SignInFormPassword'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/sign-in')({
@@ -6,5 +6,5 @@ export const Route = createFileRoute('/sign-in')({
 })
 
 function RouteComponent() {
-  return <SignInWithPassword />
+  return <SignInFormPassword />
 }

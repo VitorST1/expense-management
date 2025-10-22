@@ -6,7 +6,7 @@ export const Route = createFileRoute('/')({
     if (!context.userId) {
       throw redirect({ to: '/sign-in' })
     }
-    
+
     return {
       userId: context.userId,
       username: context.username
@@ -17,7 +17,7 @@ export const Route = createFileRoute('/')({
 function App() {
   const username = Route.useLoaderData()?.username?.replace(/^\w/, (c) => c.toUpperCase())
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
+    <main className="flex flex-col items-center justify-center grow">
       <h1 className="text-3xl font-bold underline">Hello {username}!</h1>
     </main>
   )
