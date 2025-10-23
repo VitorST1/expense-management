@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner"
 import { useState } from "react";
-import { ConvexError } from "convex/values";
 import { authClient } from "@/lib/auth-client";
 import { useNavigate } from "@tanstack/react-router";
 
@@ -29,17 +28,7 @@ export function SignInWithPassword({
   
       if (error) {
         console.error(error);
-        let toastTitle: string;
-        if (
-          error instanceof ConvexError &&
-          error.data === "INVALID_PASSWORD"
-        ) {
-          toastTitle =
-            "Invalid password - check the requirements and try again.";
-        } else {
-          toastTitle = "Could not sign in, did you mean to sign up?"
-        }
-        toast.error(toastTitle);
+        toast.error("Could not sign in, did you mean to sign up?");
         setSubmitting(false);
   
         return
@@ -64,7 +53,16 @@ export function SignInWithPassword({
   
       if (error) {
         console.error(error);
-        toast.error("Could not sign up, did you mean to sign in?");
+        let toastTitle: string;
+        if (
+          error.code === "PASSWORD_TOO_SHORT"
+        ) {
+          toastTitle =
+            "Invalid password - check the requirements and try again.";
+        } else {
+          toastTitle = "Could not sign up, did you mean to sign in?"
+        }
+        toast.error(toastTitle);
         setSubmitting(false);
   
         return

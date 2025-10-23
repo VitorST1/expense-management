@@ -6,7 +6,7 @@ export function SignInFormPassword() {
       <h2 className="font-semibold text-2xl tracking-tight">
         Sign in or create an account
       </h2>
-      <SignInWithPassword />
+      <SignInWithPassword passwordRequirements="At least 8 characters long" />
     </div>
   );
 }
