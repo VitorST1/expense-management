@@ -89,7 +89,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body className="flex flex-col min-h-screen">
+      <body className="flex flex-col min-h-screen bg-zinc-900">
         <ConvexBetterAuthProvider
           client={context.convexClient}
           authClient={authClient}
