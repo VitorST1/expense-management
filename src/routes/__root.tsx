@@ -13,6 +13,7 @@ import { getCookie, getRequest } from '@tanstack/react-start/server'
 import { ConvexBetterAuthProvider } from '@convex-dev/better-auth/react'
 import { fetchSession, getCookieName } from '@convex-dev/better-auth/react-start'
 import { authClient } from "@/lib/auth-client";
+import { getLocale } from '@/paraglide/runtime'
 
 import Header from '../components/Header'
 
@@ -85,7 +86,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   const context = useRouteContext({ from: Route.id })
   
   return (
-    <html lang="en">
+    <html lang={getLocale()}>
       <head>
         <HeadContent />
       </head>

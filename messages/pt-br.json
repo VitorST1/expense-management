@@ -14,5 +14,9 @@
   "error_password_too_short": "Precisa ter pelo menos 8 caracteres",
   "error_could_not_sign_in": "Não foi possível logar, você queria criar uma conta?",
   "error_could_not_sign_up": "Não foi possível criar uma conta, você queria logar?",
-  "password_requirements": "Pelo menos 8 caracteres"
+  "password_requirements": "Pelo menos 8 caracteres",
+  "lang_en": "Inglês",
+  "lang_pt_br": "Português",
+  "language_search": "Pesquisar idioma",
+  "language_not_found": "Nenhum idioma encontrado"
 }

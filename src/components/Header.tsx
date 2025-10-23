@@ -13,6 +13,7 @@ import {
   StickyNote,
   X,
 } from 'lucide-react'
+import PopoverLanguage from './PopoverLanguage'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
@@ -22,23 +23,28 @@ export default function Header() {
 
   return (
     <>
-      <header className="p-4 flex items-center bg-zinc-950 border-b border-zinc-700 text-white shadow-lg">
-        <button
-          onClick={() => setIsOpen(true)}
-          className="p-2 hover:bg-zinc-700 rounded-lg transition-colors"
-          aria-label="Open menu"
-        >
-          <Menu size={24} />
-        </button>
-        <h1 className="ml-4 text-xl font-semibold">
-          <Link to="/">
-            <img
-              src="/tanstack-word-logo-white.svg"
-              alt="TanStack Logo"
-              className="h-10"
-            />
-          </Link>
-        </h1>
+      <header className="p-4 grid grid-cols-2 items-center bg-zinc-950 border-b border-zinc-700 text-white shadow-lg">
+        <div className="flex items-center">
+          <button
+            onClick={() => setIsOpen(true)}
+            className="p-2 hover:bg-zinc-700 rounded-lg transition-colors"
+            aria-label="Open menu"
+          >
+            <Menu size={24} />
+          </button>
+          <h1 className="ml-4 text-xl font-semibold">
+            <Link to="/">
+              <img
+                src="/tanstack-word-logo-white.svg"
+                alt="TanStack Logo"
+                className="h-10"
+              />
+            </Link>
+          </h1>
+        </div>
+        <div className="flex items-center justify-end-safe">
+          <PopoverLanguage />
+        </div>
       </header>
 
       <aside

@@ -14,5 +14,9 @@
   "error_password_too_short": "Needs to be at least 8 characters long",
   "error_could_not_sign_in": "Could not sign in, did you mean to sign up?",
   "error_could_not_sign_up": "Could not sign up, did you mean to sign in?",
-  "password_requirements": "At least 8 characters long"
+  "password_requirements": "At least 8 characters long",
+  "lang_en": "English",
+  "lang_pt_br": "Portuguese",
+  "language_search": "Search language",
+  "language_not_found": "No language found"
 }

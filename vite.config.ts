@@ -10,7 +10,7 @@ const config = defineConfig({
     paraglideVitePlugin({
       project: './project.inlang',
       outdir: './src/paraglide',
-      strategy: ["cookie", "preferredLanguage", "url", "baseLocale"],
+      strategy: ["cookie", "preferredLanguage", "baseLocale"],
     }),
     // this is the plugin that enables path aliases
     viteTsConfigPaths({
