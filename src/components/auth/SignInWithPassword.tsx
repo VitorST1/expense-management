@@ -4,6 +4,7 @@ import { toast } from "sonner"
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { useNavigate } from "@tanstack/react-router";
+import { m } from "@/paraglide/messages";
 
 export function SignInWithPassword({
   handlePasswordReset,
@@ -28,14 +29,14 @@ export function SignInWithPassword({
   
       if (error) {
         console.error(error);
-        toast.error("Could not sign in, did you mean to sign up?");
+        toast.error(m.error_could_not_sign_in);
         setSubmitting(false);
   
         return
       }
     } catch (error) {
       console.error('123', error);
-      toast.error("Could not sign in, did you mean to sign up?");
+      toast.error(m.error_could_not_sign_in);
       setSubmitting(false);
     }
 
@@ -58,9 +59,9 @@ export function SignInWithPassword({
           error.code === "PASSWORD_TOO_SHORT"
         ) {
           toastTitle =
-            "Invalid password - check the requirements and try again.";
+            `${m.invalid_password()} - ${m.error_password_too_short()}`;
         } else {
-          toastTitle = "Could not sign up, did you mean to sign in?"
+          toastTitle = m.error_could_not_sign_up()
         }
         toast.error(toastTitle);
         setSubmitting(false);
@@ -69,7 +70,7 @@ export function SignInWithPassword({
       }
     } catch (error) {
       console.error('123', error);
-      toast.error("Could not sign up, did you mean to sign in?");
+      toast.error(m.error_could_not_sign_up());
       setSubmitting(false);
     }
 
@@ -94,14 +95,14 @@ export function SignInWithPassword({
     >
       {flow === "signUp" && (
         <>
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">{m.name()}</label>
           <Input name="name" id="name" className="mb-4" />
         </>
       )}
-      <label htmlFor="email">Email</label>
+      <label htmlFor="email">{m.email()}</label>
       <Input name="email" id="email" className="mb-4" autoComplete="email" />
       <div className="flex items-center justify-between">
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password">{m.password()}</label>
         {handlePasswordReset && flow === "signIn" ? (
           <Button
             className="p-0 h-auto"
@@ -109,7 +110,7 @@ export function SignInWithPassword({
             variant="link"
             onClick={handlePasswordReset}
           >
-            Forgot your password?
+            {m.forgot_password()}
           </Button>
         ) : null}
       </div>
@@ -127,7 +128,7 @@ export function SignInWithPassword({
       {flow === "signUp" && customSignUp}
       <input name="flow" value={flow} type="hidden" />
       <Button type="submit" disabled={submitting} className="mt-4">
-        {flow === "signIn" ? "Sign in" : "Sign up"}
+        {flow === "signIn" ? m.sign_in() : m.sign_up()}
       </Button>
       <Button
         variant="link"
@@ -137,8 +138,8 @@ export function SignInWithPassword({
         }}
       >
         {flow === "signIn"
-          ? "Don't have an account? Sign up"
-          : "Already have an account? Sign in"}
+          ? `${m.dont_have_an_account()} ${m.sign_up()}`
+          : `${m.already_have_an_account()} ${m.sign_in()}`}
       </Button>
     </form>
   );

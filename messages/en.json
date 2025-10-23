@@ -1,0 +1,18 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "sign_in_or_create_account": "Sign in or create an account",
+  "name": "Name",
+  "email": "Email",
+  "password": "Password",
+  "forgot_password": "Forgot your password?",
+  "sign_in": "Sign in",
+  "sign_up": "Sign up",
+  "reset_password": "Reset password",
+  "already_have_an_account": "Already have an account?",
+  "dont_have_an_account": "Don't have an account?",
+  "invalid_password": "Invalid password",
+  "error_password_too_short": "Needs to be at least 8 characters long",
+  "error_could_not_sign_in": "Could not sign in, did you mean to sign up?",
+  "error_could_not_sign_up": "Could not sign up, did you mean to sign in?",
+  "password_requirements": "At least 8 characters long"
+}
