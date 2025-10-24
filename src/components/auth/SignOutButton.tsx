@@ -7,7 +7,7 @@ export default function SignOutButton() {
 
     const signOut = () => {
         authClient.signOut()
-        navigate({ to: "/sign-in" })
+        navigate({ to: "/sign-in", search: { redirect: "/" } })
     }
 
     return (
