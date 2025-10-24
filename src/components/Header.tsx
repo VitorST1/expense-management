@@ -14,6 +14,8 @@ import {
   X,
 } from 'lucide-react'
 import PopoverLanguage from './PopoverLanguage'
+import SignOutButton from './auth/SignOutButton'
+import { Authenticated } from 'convex/react'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
@@ -42,8 +44,11 @@ export default function Header() {
             </Link>
           </h1>
         </div>
-        <div className="flex items-center justify-end-safe">
+        <div className="flex items-center justify-end-safe gap-4">
           <PopoverLanguage />
+          <Authenticated>
+            <SignOutButton />
+          </Authenticated>
         </div>
       </header>
 
