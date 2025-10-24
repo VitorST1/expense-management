@@ -131,7 +131,7 @@ export function SignInWithPassword({
         autoComplete={flow === "signIn" ? "current-password" : "new-password"}
       />
       {flow === "signUp" && passwordRequirements !== null && (
-        <span className="text-gray-500 font-thin text-sm">
+        <span className="text-zinc-400 font-thin text-sm">
           {passwordRequirements}
         </span>
       )}
