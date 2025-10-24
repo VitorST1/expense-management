@@ -53,16 +53,26 @@ export function SignInWithPassword({
       console.log({data, error})
   
       if (error) {
-        console.error(error);
         let toastTitle: string;
-        if (
-          error.code === "PASSWORD_TOO_SHORT"
-        ) {
-          toastTitle =
-            `${m.invalid_password()} - ${m.error_password_too_short()}`;
-        } else {
-          toastTitle = m.error_could_not_sign_up()
+
+        switch(error.message) {
+          case "User already exists. Use another email.":
+            toastTitle = m.error_email_already_exists();
+            break;
+          case "Invalid email":
+            toastTitle = m.error_invalid_email();
+            break;
+          case "Password too short":
+            toastTitle = `${m.invalid_password()} - ${m.error_password_too_short()}`;
+            break;
+          case "Password too long":
+            toastTitle = `${m.invalid_password()} - ${m.error_password_too_long()}`;
+            break;
+          default:
+            toastTitle = m.error_could_not_sign_up();
+            break;
         }
+
         toast.error(toastTitle);
         setSubmitting(false);
   
