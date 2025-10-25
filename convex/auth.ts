@@ -2,7 +2,7 @@ import { createClient, type GenericCtx } from "@convex-dev/better-auth";
 import { convex } from "@convex-dev/better-auth/plugins";
 import { components } from "./_generated/api";
 import { DataModel } from "./_generated/dataModel";
-import { query } from "./_generated/server";
+import { query, QueryCtx } from "./_generated/server";
 import { betterAuth } from "better-auth";
 
 const siteUrl = process.env.SITE_URL!;
@@ -36,11 +36,27 @@ export const createAuth = (
   });
 };
 
-// Example function for getting the current user
-// Feel free to edit, omit, etc.
+export const safeGetUser = async (ctx: QueryCtx) => {
+  const authUser = await authComponent.safeGetAuthUser(ctx)
+
+  if (!authUser) {
+    return
+  }
+
+  return authUser
+}
+
+export const getUser = async (ctx: QueryCtx) => {
+  const user = await safeGetUser(ctx)
+  if (!user) {
+    throw new Error('User not found')
+  }
+  return user
+}
+
 export const getCurrentUser = query({
   args: {},
   handler: async (ctx) => {
     return authComponent.getAuthUser(ctx);
   },
-});
+})
