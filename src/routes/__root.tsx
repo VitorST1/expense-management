@@ -8,7 +8,6 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import { createServerFn } from '@tanstack/react-start'
 import { ConvexQueryClient } from '@convex-dev/react-query'
-import { ConvexReactClient } from 'convex/react'
 import { getCookie, getRequest } from '@tanstack/react-start/server'
 import { ConvexBetterAuthProvider } from '@convex-dev/better-auth/react'
 import { fetchSession, getCookieName } from '@convex-dev/better-auth/react-start'
@@ -16,8 +15,6 @@ import { authClient } from "@/lib/auth-client";
 import { getLocale } from '@/paraglide/runtime'
 
 import Header from '../components/Header'
-
-import ConvexProvider from '../integrations/convex/provider'
 
 import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
 
@@ -42,7 +39,6 @@ const fetchAuth = createServerFn({ method: 'GET' }).handler(async () => {
 
 interface MyRouterContext {
   queryClient: QueryClient
-  convexClient: ConvexReactClient
   convexQueryClient: ConvexQueryClient
 }
 
@@ -92,10 +88,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body className="flex flex-col min-h-screen bg-zinc-950 dark">
         <ConvexBetterAuthProvider
-          client={context.convexClient}
+          client={context.convexQueryClient.convexClient}
           authClient={authClient}
         >
-          <ConvexProvider>
             <Header />
             {children}
             <Toaster />
@@ -111,7 +106,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                 TanStackQueryDevtools,
               ]}
             />
-          </ConvexProvider>
         </ConvexBetterAuthProvider>
         <Scripts />
       </body>
