@@ -21,5 +21,8 @@
   "lang_en": "Inglês",
   "lang_pt_br": "Português",
   "language_search": "Pesquisar idioma",
-  "language_not_found": "Nenhum idioma encontrado"
+  "language_not_found": "Nenhum idioma encontrado",
+  "page_dont_exist": "Essa página não existe",
+  "go_back": "Voltar",
+  "start_over": "Início"
 }
