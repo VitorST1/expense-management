@@ -1,6 +1,7 @@
 import { authClient } from "@/lib/auth-client";
 import { Button } from "../ui/button";
 import { useNavigate } from "@tanstack/react-router";
+import { m } from "@/paraglide/messages"
 
 export default function SignOutButton() {
     const navigate = useNavigate()
@@ -12,7 +13,7 @@ export default function SignOutButton() {
 
     return (
         <Button onClick={signOut}>
-            Sign out
+            {m.sign_out()}
         </Button>
     )
 }
