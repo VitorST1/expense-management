@@ -7,7 +7,7 @@ import {
 	CommandItem,
 	CommandList,
 } from "@/components/ui/command"
-import { cn } from "@/lib/utils"
+import { cn, getInternationalizationMessageFromKey } from "@/lib/utils"
 import { CheckIcon, LanguagesIcon } from "lucide-react"
 import { m } from "@/paraglide/messages"
 import { getLocale, setLocale, locales } from "@/paraglide/runtime"
@@ -15,11 +15,16 @@ import { Button } from "./ui/button"
 
 export default function PopoverLanguage() {
 	const languages = locales.map((locale: string) => {
-		const key = `lang_${locale.replace(/-/g, "_")}` as keyof typeof m
-		const labelFn = m[key]
+		const label = getInternationalizationMessageFromKey({
+			prefix: "lang_",
+			value: locale,
+			regex: /-/g,
+			replacer: "_",
+		})
+		
 		return {
 			value: locale,
-			label: typeof labelFn === "function" ? labelFn() : locale,
+			label,
 		}
 	})
 
