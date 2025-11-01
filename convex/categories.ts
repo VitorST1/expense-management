@@ -1,5 +1,5 @@
 import { mutation, query } from "./_generated/server"
-import { v } from 'convex/values'
+import { ConvexError, v } from 'convex/values'
 import { safeGetUser } from "./auth"
 import schema from "./schema"
 import { partial } from "convex-helpers/validators"
@@ -29,6 +29,10 @@ export const create = mutation({
         const user = await safeGetUser(ctx)
         if (!user) {
             return
+        }
+
+        if (!fields.name) {
+            throw new ConvexError("Name cannot be empty")
         }
         
         return await ctx.db.insert("categories", {
