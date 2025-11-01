@@ -93,7 +93,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         >
             <Header />
             {children}
-            <Toaster />
+            <Toaster richColors closeButton />
             <TanStackDevtools
               config={{
                 position: 'bottom-right',
