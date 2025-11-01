@@ -10,6 +10,7 @@ interface MessageKeyOptions {
 	regex?: RegExp
 	replacer?: string
 	transform?: (str: string) => string
+	fallback?: string
 }
 
 export function cn(...inputs: ClassValue[]) {
@@ -22,10 +23,11 @@ export function getInternationalizationMessageFromKey({
 	regex = / /g,
 	replacer = "_",
 	transform = (s) => s.toLowerCase(),
-}: MessageKeyOptions & { fallback?: string }): string {
+	fallback,
+}: MessageKeyOptions): string | undefined {
 	const normalized = transform(value).replace(regex, replacer)
 	const key = `${prefix}${normalized}` as keyof MessageMap
 	const msgFn = m[key]
 
-	return typeof msgFn === "function" ? msgFn() : value
+	return typeof msgFn === "function" ? msgFn() : fallback
 }
