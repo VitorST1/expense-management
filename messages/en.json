@@ -25,5 +25,12 @@
   "language_not_found": "No language found",
   "page_dont_exist": "The page you are looking for does not exist.",
   "go_back": "Go back",
-  "start_over": "Start Over"
+  "start_over": "Start Over",
+  "add_new_category": "Add new category",
+  "add_category": "Add category",
+  "category_name": "Category name",
+  "error_name_cannot_be_empty": "Name cannot be empty",
+  "error_name_too_long": "Name can have a maximum of 50 characters",
+  "error_occurred": "An error occurred",
+  "something_went_wrong": "Oops, something went wrong"
 }

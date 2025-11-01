@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
 import { Route as DemoTanstackQueryRouteImport } from './routes/demo/tanstack-query'
 import { Route as DemoConvexRouteImport } from './routes/demo/convex'
+import { Route as AuthenticatedCategoriesRouteImport } from './routes/_authenticated/categories'
 import { Route as DemoStartServerFuncsRouteImport } from './routes/demo/start.server-funcs'
 import { Route as DemoStartApiRequestRouteImport } from './routes/demo/start.api-request'
 import { Route as DemoFormSimpleRouteImport } from './routes/demo/form.simple'
@@ -49,6 +50,11 @@ const DemoConvexRoute = DemoConvexRouteImport.update({
   id: '/demo/convex',
   path: '/demo/convex',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedCategoriesRoute = AuthenticatedCategoriesRouteImport.update({
+  id: '/categories',
+  path: '/categories',
+  getParentRoute: () => AuthenticatedRoute,
 } as any)
 const DemoStartServerFuncsRoute = DemoStartServerFuncsRouteImport.update({
   id: '/demo/start/server-funcs',
@@ -108,6 +114,7 @@ const DemoStartSsrDataOnlyRoute = DemoStartSsrDataOnlyRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/sign-in': typeof SignInRoute
+  '/categories': typeof AuthenticatedCategoriesRoute
   '/demo/convex': typeof DemoConvexRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/': typeof AuthenticatedIndexRoute
@@ -125,6 +132,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/sign-in': typeof SignInRoute
+  '/categories': typeof AuthenticatedCategoriesRoute
   '/demo/convex': typeof DemoConvexRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/': typeof AuthenticatedIndexRoute
@@ -144,6 +152,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/sign-in': typeof SignInRoute
+  '/_authenticated/categories': typeof AuthenticatedCategoriesRoute
   '/demo/convex': typeof DemoConvexRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
@@ -163,6 +172,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/sign-in'
+    | '/categories'
     | '/demo/convex'
     | '/demo/tanstack-query'
     | '/'
@@ -180,6 +190,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/sign-in'
+    | '/categories'
     | '/demo/convex'
     | '/demo/tanstack-query'
     | '/'
@@ -198,6 +209,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_authenticated'
     | '/sign-in'
+    | '/_authenticated/categories'
     | '/demo/convex'
     | '/demo/tanstack-query'
     | '/_authenticated/'
@@ -268,6 +280,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/demo/convex'
       preLoaderRoute: typeof DemoConvexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/categories': {
+      id: '/_authenticated/categories'
+      path: '/categories'
+      fullPath: '/categories'
+      preLoaderRoute: typeof AuthenticatedCategoriesRouteImport
+      parentRoute: typeof AuthenticatedRoute
     }
     '/demo/start/server-funcs': {
       id: '/demo/start/server-funcs'
@@ -350,10 +369,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteChildren {
+  AuthenticatedCategoriesRoute: typeof AuthenticatedCategoriesRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedCategoriesRoute: AuthenticatedCategoriesRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
 }
 
