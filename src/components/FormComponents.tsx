@@ -45,23 +45,31 @@ function ErrorMessages({
 export function TextField({
   label,
   placeholder,
+  autocomplete,
+  isInvalid
 }: {
   label: string
   placeholder?: string
+  autocomplete?: string
+  isInvalid?: boolean
 }) {
   const field = useFieldContext<string>()
   const errors = useStore(field.store, (state) => state.meta.errors)
 
   return (
     <div>
-      <Label htmlFor={label} className="mb-2 text-xl font-bold">
+      <Label htmlFor={field.name} className="mb-2 text-xl font-bold">
         {label}
       </Label>
       <Input
+        id={field.name}
+        name={field.name}
         value={field.state.value}
         placeholder={placeholder}
         onBlur={field.handleBlur}
         onChange={(e) => field.handleChange(e.target.value)}
+        autoComplete={autocomplete}
+        aria-invalid={isInvalid}
       />
       {field.state.meta.isTouched && <ErrorMessages errors={errors} />}
     </div>
@@ -71,24 +79,31 @@ export function TextField({
 export function TextArea({
   label,
   rows = 3,
+  placeholder,
+  isInvalid
 }: {
   label: string
   rows?: number
+  placeholder?: string
+  isInvalid?: boolean
 }) {
   const field = useFieldContext<string>()
   const errors = useStore(field.store, (state) => state.meta.errors)
 
   return (
     <div>
-      <Label htmlFor={label} className="mb-2 text-xl font-bold">
+      <Label htmlFor={field.name} className="mb-2 text-xl font-bold">
         {label}
       </Label>
       <ShadcnTextarea
-        id={label}
+        id={field.name}
+        name={field.name}
         value={field.state.value}
+        placeholder={placeholder}
         onBlur={field.handleBlur}
-        rows={rows}
         onChange={(e) => field.handleChange(e.target.value)}
+        rows={rows}
+        aria-invalid={isInvalid}
       />
       {field.state.meta.isTouched && <ErrorMessages errors={errors} />}
     </div>
