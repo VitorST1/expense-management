@@ -32,5 +32,7 @@
   "error_name_cannot_be_empty": "Nome não pode ser vazio",
     "error_name_too_long": "Nome pode ter no máximo 50 caracteres",
   "error_occurred": "Ocorreu um erro",
-  "something_went_wrong": "Oops, algo deu errado"
+  "something_went_wrong": "Oops, algo deu errado",
+  "edit": "Editar",
+  "delete": "Deletar"
 }

@@ -32,5 +32,7 @@
   "error_name_cannot_be_empty": "Name cannot be empty",
   "error_name_too_long": "Name can have a maximum of 50 characters",
   "error_occurred": "An error occurred",
-  "something_went_wrong": "Oops, something went wrong"
+  "something_went_wrong": "Oops, something went wrong",
+  "edit": "Edit",
+  "delete": "Delete"
 }
