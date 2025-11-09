@@ -36,7 +36,9 @@
   "something_went_wrong": "Oops, something went wrong",
   "cancel": "Cancel",
   "edit": "Edit",
+  "edit_title": "Edit {item}",
   "delete": "Delete",
   "delete_confirm_title": "Delete {item}?",
-  "delete_confirm_description": "Are you sure you want to delete “{name}”?"
+  "delete_confirm_description": "Are you sure you want to delete “{name}”?",
+  "save": "Save"
 }

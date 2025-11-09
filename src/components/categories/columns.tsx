@@ -6,6 +6,7 @@ import { PencilIcon, Trash2Icon } from "lucide-react"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
 import { AlertDialog, AlertDialogTrigger } from "../ui/alert-dialog"
 import DeleteDialogContent from "../ui/DeleteDialogContent"
+import EditCategoryDialog from "./EditCategoryDialog"
 
 export const columns = ({
   onDelete,
@@ -26,11 +27,13 @@ export const columns = ({
         <div className="flex gap-2">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button
-                className="bg-blue-500 text-zinc-100 hover:bg-blue-700"
-                size="icon-sm">
-                <PencilIcon />
-              </Button>
+              <EditCategoryDialog category={category}>
+                <Button
+                  className="bg-blue-500 text-zinc-100 hover:bg-blue-700"
+                  size="icon-sm">
+                  <PencilIcon />
+                </Button>
+              </EditCategoryDialog>
             </TooltipTrigger>
             <TooltipContent
               className="bg-blue-700 text-zinc-100"
