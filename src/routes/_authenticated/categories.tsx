@@ -10,12 +10,14 @@ export const Route = createFileRoute("/_authenticated/categories")({
     await opts.context.queryClient.ensureQueryData(
       convexQuery(api.categories.get, {}),
     )
-  }
+  },
 })
 
 function RouteComponent() {
-  return  <div className="flex flex-col grow gap-4 p-4">
-    <AddCategoryItem />
-    <CategoryTable />
-  </div>
+  return (
+    <div className="flex flex-col grow gap-4 p-4">
+      <AddCategoryItem />
+      <CategoryTable />
+    </div>
+  )
 }

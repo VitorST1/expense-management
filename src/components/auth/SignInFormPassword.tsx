@@ -1,4 +1,4 @@
-import { SignInWithPassword } from "@/components/auth/SignInWithPassword";
+import { SignInWithPassword } from "@/components/auth/SignInWithPassword"
 import { m } from "@/paraglide/messages"
 
 export function SignInFormPassword() {
@@ -9,5 +9,5 @@ export function SignInFormPassword() {
       </h2>
       <SignInWithPassword passwordRequirements={m.password_requirements()} />
     </div>
-  );
+  )
 }

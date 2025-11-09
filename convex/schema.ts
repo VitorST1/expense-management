@@ -1,5 +1,5 @@
-import { defineSchema, defineTable } from 'convex/server'
-import { v } from 'convex/values'
+import { defineSchema, defineTable } from "convex/server"
+import { v } from "convex/values"
 
 export default defineSchema({
   todos: defineTable({
@@ -9,16 +9,15 @@ export default defineSchema({
   categories: defineTable({
     name: v.string(),
     userId: v.string(),
-  })
-    .index('by_user', ['userId']),
+  }).index("by_user", ["userId"]),
   expenses: defineTable({
-    category: v.id('categories'),
+    category: v.id("categories"),
     description: v.optional(v.string()),
     amount: v.number(),
     date: v.number(),
     userId: v.string(),
   })
-    .index('by_user', ['userId'])
-    .index('by_category', ['category'])
-    .index('by_date', ['date']),
+    .index("by_user", ["userId"])
+    .index("by_category", ["category"])
+    .index("by_date", ["date"]),
 })

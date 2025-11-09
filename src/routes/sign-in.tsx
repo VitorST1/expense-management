@@ -1,9 +1,9 @@
-import { SignInFormPassword } from '@/components/auth/SignInFormPassword'
-import { createFileRoute, redirect } from '@tanstack/react-router'
+import { SignInFormPassword } from "@/components/auth/SignInFormPassword"
+import { createFileRoute, redirect } from "@tanstack/react-router"
 
-export const Route = createFileRoute('/sign-in')({
+export const Route = createFileRoute("/sign-in")({
   validateSearch: (search) => ({
-    redirect: (search.redirect as string) || '/',
+    redirect: (search.redirect as string) || "/",
   }),
   beforeLoad: ({ context, search }) => {
     // Redirect if already authenticated

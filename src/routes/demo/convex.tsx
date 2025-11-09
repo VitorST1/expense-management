@@ -1,12 +1,12 @@
-import { useCallback, useState } from 'react'
-import { createFileRoute } from '@tanstack/react-router'
-import { useQuery, useMutation } from 'convex/react'
-import { Trash2, Plus, Check, Circle } from 'lucide-react'
+import { useCallback, useState } from "react"
+import { createFileRoute } from "@tanstack/react-router"
+import { useQuery, useMutation } from "convex/react"
+import { Trash2, Plus, Check, Circle } from "lucide-react"
 
-import { api } from '../../../convex/_generated/api'
-import { Id } from '../../../convex/_generated/dataModel'
+import { api } from "../../../convex/_generated/api"
+import { Id } from "../../../convex/_generated/dataModel"
 
-export const Route = createFileRoute('/demo/convex')({
+export const Route = createFileRoute("/demo/convex")({
   component: ConvexTodos,
 })
 
@@ -16,24 +16,24 @@ function ConvexTodos() {
   const toggleTodo = useMutation(api.todos.toggle)
   const removeTodo = useMutation(api.todos.remove)
 
-  const [newTodo, setNewTodo] = useState('')
+  const [newTodo, setNewTodo] = useState("")
 
   const handleAddTodo = useCallback(async () => {
     if (newTodo.trim()) {
       await addTodo({ text: newTodo.trim() })
-      setNewTodo('')
+      setNewTodo("")
     }
   }, [addTodo, newTodo])
 
   const handleToggleTodo = useCallback(
-    async (id: Id<'todos'>) => {
+    async (id: Id<"todos">) => {
       await toggleTodo({ id })
     },
     [toggleTodo],
   )
 
   const handleRemoveTodo = useCallback(
-    async (id: Id<'todos'>) => {
+    async (id: Id<"todos">) => {
       await removeTodo({ id })
     },
     [removeTodo],
@@ -47,9 +47,8 @@ function ConvexTodos() {
       className="min-h-screen flex items-center justify-center p-4"
       style={{
         background:
-          'linear-gradient(135deg, #667a56 0%, #8fbc8f 25%, #90ee90 50%, #98fb98 75%, #f0fff0 100%)',
-      }}
-    >
+          "linear-gradient(135deg, #667a56 0%, #8fbc8f 25%, #90ee90 50%, #98fb98 75%, #f0fff0 100%)",
+      }}>
       <div className="w-full max-w-2xl">
         {/* Header Card */}
         <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-green-200/50 p-8 mb-6">
@@ -79,7 +78,7 @@ function ConvexTodos() {
               value={newTodo}
               onChange={(e) => setNewTodo(e.target.value)}
               onKeyDown={(e) => {
-                if (e.key === 'Enter') {
+                if (e.key === "Enter") {
                   handleAddTodo()
                 }
               }}
@@ -89,8 +88,7 @@ function ConvexTodos() {
             <button
               onClick={handleAddTodo}
               disabled={!newTodo.trim()}
-              className="bg-linear-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-xl"
-            >
+              className="bg-linear-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-xl">
               <Plus size={20} />
               Add
             </button>
@@ -120,37 +118,33 @@ function ConvexTodos() {
                 <div
                   key={todo._id}
                   className={`p-4 flex items-center gap-4 hover:bg-green-50/50 transition-colors ${
-                    todo.completed ? 'opacity-75' : ''
+                    todo.completed ? "opacity-75" : ""
                   }`}
                   style={{
                     animationDelay: `${index * 50}ms`,
-                  }}
-                >
+                  }}>
                   <button
                     onClick={() => handleToggleTodo(todo._id)}
                     className={`shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${
                       todo.completed
-                        ? 'bg-green-500 border-green-500 text-white'
-                        : 'border-green-300 hover:border-green-400 text-transparent hover:text-green-400'
-                    }`}
-                  >
+                        ? "bg-green-500 border-green-500 text-white"
+                        : "border-green-300 hover:border-green-400 text-transparent hover:text-green-400"
+                    }`}>
                     <Check size={14} />
                   </button>
 
                   <span
                     className={`flex-1 text-lg transition-all duration-200 ${
                       todo.completed
-                        ? 'line-through text-gray-500'
-                        : 'text-gray-800'
-                    }`}
-                  >
+                        ? "line-through text-gray-500"
+                        : "text-gray-800"
+                    }`}>
                     {todo.text}
                   </span>
 
                   <button
                     onClick={() => handleRemoveTodo(todo._id)}
-                    className="shrink-0 p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                  >
+                    className="shrink-0 p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">
                     <Trash2 size={18} />
                   </button>
                 </div>

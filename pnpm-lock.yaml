@@ -150,6 +150,9 @@ importers:
       jsdom:
         specifier: ^27.0.1
         version: 27.0.1(postcss@8.5.6)
+      oxfmt:
+        specifier: ^0.11.0
+        version: 0.11.0
       oxlint:
         specifier: ^1.24.0
         version: 1.24.0
@@ -985,6 +988,46 @@ packages:
   '@oslojs/encoding@1.1.0':
     resolution: {integrity: sha512-70wQhgYmndg4GCPxPPxPGevRKqTIJ2Nh4OkiMWmDAVYsTQ+Ta7Sq+rPevXyXGdzr30/qZBnyOalCszoMxlyldQ==}
 
+  '@oxfmt/darwin-arm64@0.11.0':
+    resolution: {integrity: sha512-RS9j58a2/FSG4VIZDoTDNHBI/0s6k2irrioc5AjARADXLvdojh3liYuedyw9aoZcLylF7tBmcSyoIVQKWKumMw==}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@oxfmt/darwin-x64@0.11.0':
+    resolution: {integrity: sha512-EfkvAlX3wKZqrt3u7NKURp5aJ+/xrZRyz5OcUCMFh6HeicMH6YIyKcSl9YuRlaWss0tVKekzIFFr59pPhb+EqA==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@oxfmt/linux-arm64-gnu@0.11.0':
+    resolution: {integrity: sha512-7iAv1whJDu3sRd8nFV76indRUbPe22kwpzDwx52s7G84xdzNQKNbkRxfyt2O2jOxYA6FeQx3A0FvYQfR8rRptA==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@oxfmt/linux-arm64-musl@0.11.0':
+    resolution: {integrity: sha512-auUmjb/u8UDbZVkC4RDy4WmLAu7wPsC2Q4QcsQz30ssvljTcCm8x8lZbkmkEqpAuIU2kRIhPvjC3l367fJT9ug==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@oxfmt/linux-x64-gnu@0.11.0':
+    resolution: {integrity: sha512-7rxz9n03LuzuswP9oi5g0pbwuWEAdlWo4RpnU1Onx42CplPDP9/DX5JJOQnfBJXrBUrrVO/VHsQwYzB86Gvr/A==}
+    cpu: [x64]
+    os: [linux]
+
+  '@oxfmt/linux-x64-musl@0.11.0':
+    resolution: {integrity: sha512-sZLTSj9Z/efDaER0KTi3jkSTTZMdCxhb7h82Ubd6ZC0R9YM1rTwnfxzfmPl+A9OqwvvkA83MkAzs/jmVFLjQMA==}
+    cpu: [x64]
+    os: [linux]
+
+  '@oxfmt/win32-arm64@0.11.0':
+    resolution: {integrity: sha512-gd/Ix/hybqGlkKSvEf6KJXF362zTBQHuj8hpHTfhQY9NKE1XioHboSXZhrabnZNCqf8NbgYNce/lpqYiAfu6yQ==}
+    cpu: [arm64]
+    os: [win32]
+
+  '@oxfmt/win32-x64@0.11.0':
+    resolution: {integrity: sha512-zeEWg95FGCc9RsgK7Su5SwPForZL4INB3zArHJVgnodMeMkdHnzfaxMMnq7gPV0aJxulCC5QTGjJl8N9W5NdVw==}
+    cpu: [x64]
+    os: [win32]
+
   '@oxlint/darwin-arm64@1.24.0':
     resolution: {integrity: sha512-1Kd2+Ai1ttskhbJR+DNU4Y4YEDyP/cd50nWt2rAe2aE78dMOalaVGps3s8UnJkXpDL9ZqkgOHVDE5Doj2lxatw==}
     cpu: [arm64]
@@ -1063,6 +1106,11 @@ packages:
 
   '@peculiar/x509@1.14.0':
     resolution: {integrity: sha512-Yc4PDxN3OrxUPiXgU63c+ZRXKGE8YKF2McTciYhUHFtHVB0KMnjeFSU0qpztGhsp4P0uKix4+J2xEpIEDu8oXg==}
+
+  '@prettier/sync@0.6.1':
+    resolution: {integrity: sha512-yF9G8vK/LYUTF3Cijd7VC9La3b20F20/J/fgoR4H0B8JGOWnZVZX6+I6+vODPosjmMcpdlUV+gUqJQZp3kLOcw==}
+    peerDependencies:
+      prettier: '*'
 
   '@radix-ui/number@1.1.1':
     resolution: {integrity: sha512-MkKCwxlXTgz6CFoJx3pCwn07GKp36+aZyu/u2Ln2VrA5DcdyCZkASEDBTd8x5whTQQL5CiYf4prXKLcgQdv29g==}
@@ -2601,6 +2649,9 @@ packages:
   magic-string@0.30.19:
     resolution: {integrity: sha512-2N21sPY9Ws53PZvsEpVtNuSW+ScYbQdp4b9qUaL+9QkHUrGFKo56Lg9Emg5s9V/qrtNBmiR01sYhUOwu3H+VOw==}
 
+  make-synchronized@0.8.0:
+    resolution: {integrity: sha512-DZu4lwc0ffoFz581BSQa/BJl+1ZqIkoRQ+VejMlH0VrP4E86StAODnZujZ4sepumQj8rcP7wUnUBGM8Gu+zKUA==}
+
   mdn-data@2.12.2:
     resolution: {integrity: sha512-IEn+pegP1aManZuckezWCO+XZQDplx1366JoVhTpMpBB1sPey/SbveZQUosKiKiGYjg1wH4pMlNgXbCiYgihQA==}
 
@@ -2645,6 +2696,11 @@ packages:
   oslo@1.2.1:
     resolution: {integrity: sha512-HfIhB5ruTdQv0XX2XlncWQiJ5SIHZ7NHZhVyHth0CSZ/xzge00etRyYy/3wp/Dsu+PkxMC+6+B2lS/GcKoewkA==}
     deprecated: Package is no longer supported. Please see https://oslojs.dev for the successor project.
+
+  oxfmt@0.11.0:
+    resolution: {integrity: sha512-fCmAEoR3IIZ4LPueXL2Z1DbtBXVcKejkiJr4H2pdEg9qry/Wx1l+P+LpcZlfre0Lw/olJ3sohS/maLOxezUoeA==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    hasBin: true
 
   oxlint@1.24.0:
     resolution: {integrity: sha512-swXlnHT7ywcCApkctIbgOSjDYHwMa12yMU0iXevfDuHlYkRUcbQrUv6nhM5v6B0+Be3zTBMNDGPAMQv0oznzRQ==}
@@ -3907,6 +3963,30 @@ snapshots:
 
   '@oslojs/encoding@1.1.0': {}
 
+  '@oxfmt/darwin-arm64@0.11.0':
+    optional: true
+
+  '@oxfmt/darwin-x64@0.11.0':
+    optional: true
+
+  '@oxfmt/linux-arm64-gnu@0.11.0':
+    optional: true
+
+  '@oxfmt/linux-arm64-musl@0.11.0':
+    optional: true
+
+  '@oxfmt/linux-x64-gnu@0.11.0':
+    optional: true
+
+  '@oxfmt/linux-x64-musl@0.11.0':
+    optional: true
+
+  '@oxfmt/win32-arm64@0.11.0':
+    optional: true
+
+  '@oxfmt/win32-x64@0.11.0':
+    optional: true
+
   '@oxlint/darwin-arm64@1.24.0':
     optional: true
 
@@ -4028,6 +4108,11 @@ snapshots:
       reflect-metadata: 0.2.2
       tslib: 2.8.1
       tsyringe: 4.10.0
+
+  '@prettier/sync@0.6.1(prettier@3.6.2)':
+    dependencies:
+      make-synchronized: 0.8.0
+      prettier: 3.6.2
 
   '@radix-ui/number@1.1.1': {}
 
@@ -5654,6 +5739,8 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
 
+  make-synchronized@0.8.0: {}
+
   mdn-data@2.12.2: {}
 
   memfs-browser@3.5.10302:
@@ -5691,6 +5778,20 @@ snapshots:
     dependencies:
       '@node-rs/argon2': 1.7.0
       '@node-rs/bcrypt': 1.9.0
+
+  oxfmt@0.11.0:
+    dependencies:
+      '@prettier/sync': 0.6.1(prettier@3.6.2)
+      prettier: 3.6.2
+    optionalDependencies:
+      '@oxfmt/darwin-arm64': 0.11.0
+      '@oxfmt/darwin-x64': 0.11.0
+      '@oxfmt/linux-arm64-gnu': 0.11.0
+      '@oxfmt/linux-arm64-musl': 0.11.0
+      '@oxfmt/linux-x64-gnu': 0.11.0
+      '@oxfmt/linux-x64-musl': 0.11.0
+      '@oxfmt/win32-arm64': 0.11.0
+      '@oxfmt/win32-x64': 0.11.0
 
   oxlint@1.24.0:
     optionalDependencies:

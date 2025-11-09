@@ -1,19 +1,19 @@
-import { createRouter as createTanStackRouter } from '@tanstack/react-router'
-import { QueryClient, notifyManager } from '@tanstack/react-query'
-import { setupRouterSsrQueryIntegration } from '@tanstack/react-router-ssr-query'
-import { ConvexQueryClient } from '@convex-dev/react-query'
-import { ConvexProvider, ConvexReactClient } from 'convex/react'
-import { routeTree } from './routeTree.gen'
-import { NotFound } from './components/NotFound'
+import { createRouter as createTanStackRouter } from "@tanstack/react-router"
+import { QueryClient, notifyManager } from "@tanstack/react-query"
+import { setupRouterSsrQueryIntegration } from "@tanstack/react-router-ssr-query"
+import { ConvexQueryClient } from "@convex-dev/react-query"
+import { ConvexProvider, ConvexReactClient } from "convex/react"
+import { routeTree } from "./routeTree.gen"
+import { NotFound } from "./components/NotFound"
 
 export function getRouter() {
-  if (typeof document !== 'undefined') {
+  if (typeof document !== "undefined") {
     notifyManager.setScheduler(window.requestAnimationFrame)
   }
 
   const CONVEX_URL = (import.meta as any).env.VITE_CONVEX_URL!
   if (!CONVEX_URL) {
-    console.error('missing envar CONVEX_URL')
+    console.error("missing envar CONVEX_URL")
   }
   const convex = new ConvexReactClient(CONVEX_URL, {
     expectAuth: true,
@@ -32,7 +32,7 @@ export function getRouter() {
 
   const router = createTanStackRouter({
     routeTree,
-    defaultPreload: 'intent',
+    defaultPreload: "intent",
     defaultNotFoundComponent: () => <NotFound />,
     context: { queryClient, convexQueryClient },
     Wrap: ({ children }) => (
