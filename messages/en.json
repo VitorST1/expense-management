@@ -26,6 +26,7 @@
   "page_dont_exist": "The page you are looking for does not exist.",
   "go_back": "Go back",
   "start_over": "Start Over",
+  "category": "Category",
   "add_new_category": "Add new category",
   "add_category": "Add category",
   "category_name": "Category name",
@@ -33,6 +34,9 @@
   "error_name_too_long": "Name can have a maximum of 50 characters",
   "error_occurred": "An error occurred",
   "something_went_wrong": "Oops, something went wrong",
+  "cancel": "Cancel",
   "edit": "Edit",
-  "delete": "Delete"
+  "delete": "Delete",
+  "delete_confirm_title": "Delete {item}?",
+  "delete_confirm_description": "Are you sure you want to delete “{name}”?"
 }

@@ -4,6 +4,8 @@ import { m } from "@/paraglide/messages"
 import { Button } from "../ui/button"
 import { PencilIcon, Trash2Icon } from "lucide-react"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
+import { AlertDialog, AlertDialogTrigger } from "../ui/alert-dialog"
+import DeleteDialogContent from "../ui/DeleteDialogContent"
 
 export const columns = ({
     onDelete,
@@ -31,20 +33,30 @@ export const columns = ({
                         {m.edit()}
                     </TooltipContent>
                 </Tooltip>
-                <Tooltip>
-                    <TooltipTrigger asChild>
-                        <Button
-                            className="bg-red-500 text-zinc-100 hover:bg-red-700"
-                            size="icon-sm"
-                            onClick={() => onDelete(category._id)}
-                        >
-                            <Trash2Icon />
-                        </Button>
-                    </TooltipTrigger>
-                    <TooltipContent className="bg-red-700 text-zinc-100" arrowClassName="bg-red-700 fill-red-700" side="bottom">
-                        {m.delete()}
-                    </TooltipContent>
-                </Tooltip>
+
+                <AlertDialog>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <AlertDialogTrigger asChild>
+                                <Button
+                                    className="bg-red-500 text-zinc-100 hover:bg-red-700"
+                                    size="icon-sm"
+                                >
+                                    <Trash2Icon />
+                                </Button>
+                            </AlertDialogTrigger>
+                        </TooltipTrigger>
+                        <TooltipContent className="bg-red-700 text-zinc-100" arrowClassName="bg-red-700 fill-red-700" side="bottom">
+                            {m.delete()}
+                        </TooltipContent>
+                    </Tooltip>
+
+                    <DeleteDialogContent
+                        title={m.delete_confirm_title({ item: m.category() })}
+                        description={m.delete_confirm_description({ name: category.name })}
+                        onDelete={() => onDelete(category._id)}
+                    />
+                </AlertDialog>
             </div>
         },
     }

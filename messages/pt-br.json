@@ -26,13 +26,17 @@
   "page_dont_exist": "Essa página não existe",
   "go_back": "Voltar",
   "start_over": "Início",
+  "category": "Categoria",
   "add_new_category": "Adicionar nova categoria",
   "add_category": "Adicionar categoria",
   "category_name": "Nome da categoria",
   "error_name_cannot_be_empty": "Nome não pode ser vazio",
-    "error_name_too_long": "Nome pode ter no máximo 50 caracteres",
+  "error_name_too_long": "Nome pode ter no máximo 50 caracteres",
   "error_occurred": "Ocorreu um erro",
   "something_went_wrong": "Oops, algo deu errado",
+  "cancel": "Cancelar",
   "edit": "Editar",
-  "delete": "Deletar"
+  "delete": "Deletar",
+  "delete_confirm_title": "Deletar {item}?",
+  "delete_confirm_description": "Tem certeza que deseja deletar “{name}”?"
 }
