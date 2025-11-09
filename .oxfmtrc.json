@@ -1,4 +1,7 @@
 {
     "semi": false,
-    "bracketSameLine": true
+    "bracketSameLine": true,
+    "ignorePatterns": [
+        "_generated"
+    ]
 }
