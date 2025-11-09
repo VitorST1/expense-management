@@ -57,7 +57,8 @@ export default function AddCategoryItem() {
         e.preventDefault()
         e.stopPropagation()
         form.handleSubmit()
-      }}>
+      }}
+    >
       <Item variant="outline">
         <ItemContent>
           <ItemTitle>

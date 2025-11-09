@@ -30,7 +30,8 @@ export default function Header() {
           <button
             onClick={() => setIsOpen(true)}
             className="p-2 hover:bg-zinc-700 rounded-lg transition-colors"
-            aria-label="Open menu">
+            aria-label="Open menu"
+          >
             <Menu size={24} />
           </button>
           <h1 className="ml-4 text-xl font-semibold">
@@ -54,13 +55,15 @@ export default function Header() {
       <aside
         className={`fixed top-0 left-0 h-full w-80 bg-zinc-800 text-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        }`}>
+        }`}
+      >
         <div className="flex items-center justify-between p-4 border-b border-zinc-700">
           <h2 className="text-xl font-bold">Navigation</h2>
           <button
             onClick={() => setIsOpen(false)}
             className="p-2 hover:bg-zinc-700 rounded-lg transition-colors"
-            aria-label="Close menu">
+            aria-label="Close menu"
+          >
             <X size={24} />
           </button>
         </div>
@@ -73,7 +76,8 @@ export default function Header() {
             activeProps={{
               className:
                 "flex items-center gap-3 p-3 rounded-lg bg-blue-600 transition-colors mb-2",
-            }}>
+            }}
+          >
             <Home size={20} />
             <span className="font-medium">Home</span>
           </Link>
@@ -87,7 +91,8 @@ export default function Header() {
             activeProps={{
               className:
                 "flex items-center gap-3 p-3 rounded-lg bg-blue-600 transition-colors mb-2",
-            }}>
+            }}
+          >
             <SquareFunction size={20} />
             <span className="font-medium">Start - Server Functions</span>
           </Link>
@@ -99,7 +104,8 @@ export default function Header() {
             activeProps={{
               className:
                 "flex items-center gap-3 p-3 rounded-lg bg-blue-600 transition-colors mb-2",
-            }}>
+            }}
+          >
             <Network size={20} />
             <span className="font-medium">Start - API Request</span>
           </Link>
@@ -112,7 +118,8 @@ export default function Header() {
               activeProps={{
                 className:
                   "flex-1 flex items-center gap-3 p-3 rounded-lg bg-blue-600 transition-colors mb-2",
-              }}>
+              }}
+            >
               <StickyNote size={20} />
               <span className="font-medium">Start - SSR Demos</span>
             </Link>
@@ -123,7 +130,8 @@ export default function Header() {
                   ...prev,
                   StartSSRDemo: !prev.StartSSRDemo,
                 }))
-              }>
+              }
+            >
               {groupedExpanded.StartSSRDemo ? (
                 <ChevronDown size={20} />
               ) : (
@@ -140,7 +148,8 @@ export default function Header() {
                 activeProps={{
                   className:
                     "flex items-center gap-3 p-3 rounded-lg bg-blue-600 transition-colors mb-2",
-                }}>
+                }}
+              >
                 <StickyNote size={20} />
                 <span className="font-medium">SPA Mode</span>
               </Link>
@@ -152,7 +161,8 @@ export default function Header() {
                 activeProps={{
                   className:
                     "flex items-center gap-3 p-3 rounded-lg bg-blue-600 transition-colors mb-2",
-                }}>
+                }}
+              >
                 <StickyNote size={20} />
                 <span className="font-medium">Full SSR</span>
               </Link>
@@ -164,7 +174,8 @@ export default function Header() {
                 activeProps={{
                   className:
                     "flex items-center gap-3 p-3 rounded-lg bg-blue-600 transition-colors mb-2",
-                }}>
+                }}
+              >
                 <StickyNote size={20} />
                 <span className="font-medium">Data Only</span>
               </Link>
@@ -178,7 +189,8 @@ export default function Header() {
             activeProps={{
               className:
                 "flex items-center gap-3 p-3 rounded-lg bg-blue-600 transition-colors mb-2",
-            }}>
+            }}
+          >
             <Globe size={20} />
             <span className="font-medium">Convex</span>
           </Link>
@@ -190,7 +202,8 @@ export default function Header() {
             activeProps={{
               className:
                 "flex items-center gap-3 p-3 rounded-lg bg-blue-600 transition-colors mb-2",
-            }}>
+            }}
+          >
             <ClipboardType size={20} />
             <span className="font-medium">Simple Form</span>
           </Link>
@@ -202,7 +215,8 @@ export default function Header() {
             activeProps={{
               className:
                 "flex items-center gap-3 p-3 rounded-lg bg-blue-600 transition-colors mb-2",
-            }}>
+            }}
+          >
             <ClipboardType size={20} />
             <span className="font-medium">Address Form</span>
           </Link>
@@ -214,7 +228,8 @@ export default function Header() {
             activeProps={{
               className:
                 "flex items-center gap-3 p-3 rounded-lg bg-blue-600 transition-colors mb-2",
-            }}>
+            }}
+          >
             <Network size={20} />
             <span className="font-medium">TanStack Query</span>
           </Link>

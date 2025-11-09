@@ -1,6 +1,6 @@
 {
     "semi": false,
-    "bracketSameLine": true,
+    "bracketSameLine": false,
     "ignorePatterns": [
         "_generated"
     ]

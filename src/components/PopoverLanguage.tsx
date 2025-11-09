@@ -44,7 +44,8 @@ export default function PopoverLanguage() {
       <PopoverContent
         className="dark w-52 p-0"
         align="start"
-        aria-label={m.language_search()}>
+        aria-label={m.language_search()}
+      >
         <Command className="dark">
           <CommandInput placeholder={m.language_search()} />
           <CommandList>
@@ -57,7 +58,8 @@ export default function PopoverLanguage() {
                   keywords={[language.label]}
                   onSelect={(currentValue: string) => {
                     void setLocale(currentValue as (typeof locales)[number])
-                  }}>
+                  }}
+                >
                   {language.label}
                   <CheckIcon
                     className={cn(

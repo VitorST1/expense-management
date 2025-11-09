@@ -46,7 +46,8 @@ function AddressForm() {
       style={{
         backgroundImage:
           "radial-gradient(50% 50% at 5% 40%, #f4a460 0%, #8b4513 70%, #1a0f0a 100%)",
-      }}>
+      }}
+    >
       <div className="w-full max-w-2xl p-8 rounded-xl backdrop-blur-md bg-black/50 shadow-xl border-8 border-black/10">
         <form
           onSubmit={(e) => {
@@ -54,7 +55,8 @@ function AddressForm() {
             e.stopPropagation()
             form.handleSubmit()
           }}
-          className="space-y-6">
+          className="space-y-6"
+        >
           <form.AppField name="fullName">
             {(field) => <field.TextField label="Full Name" />}
           </form.AppField>
@@ -71,7 +73,8 @@ function AddressForm() {
                 }
                 return undefined
               },
-            }}>
+            }}
+          >
             {(field) => <field.TextField label="Email" />}
           </form.AppField>
 
@@ -84,7 +87,8 @@ function AddressForm() {
                 }
                 return undefined
               },
-            }}>
+            }}
+          >
             {(field) => <field.TextField label="Street Address" />}
           </form.AppField>
 
@@ -98,7 +102,8 @@ function AddressForm() {
                   }
                   return undefined
                 },
-              }}>
+              }}
+            >
               {(field) => <field.TextField label="City" />}
             </form.AppField>
             <form.AppField
@@ -110,7 +115,8 @@ function AddressForm() {
                   }
                   return undefined
                 },
-              }}>
+              }}
+            >
               {(field) => <field.TextField label="State" />}
             </form.AppField>
             <form.AppField
@@ -125,7 +131,8 @@ function AddressForm() {
                   }
                   return undefined
                 },
-              }}>
+              }}
+            >
               {(field) => <field.TextField label="Zip Code" />}
             </form.AppField>
           </div>
@@ -139,7 +146,8 @@ function AddressForm() {
                 }
                 return undefined
               },
-            }}>
+            }}
+          >
             {(field) => (
               <field.Select
                 label="Country"
@@ -173,7 +181,8 @@ function AddressForm() {
                 }
                 return undefined
               },
-            }}>
+            }}
+          >
             {(field) => (
               <field.TextField label="Phone" placeholder="123-456-7890" />
             )}

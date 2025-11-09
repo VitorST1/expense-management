@@ -33,7 +33,8 @@ function ErrorMessages({
       {errors.map((error) => (
         <div
           key={typeof error === "string" ? error : error.message}
-          className="text-red-500 mt-1 font-bold">
+          className="text-red-500 mt-1 font-bold"
+        >
           {typeof error === "string" ? error : error.message}
         </div>
       ))}
@@ -126,7 +127,8 @@ export function Select({
       <ShadcnSelect.Select
         name={field.name}
         value={field.state.value}
-        onValueChange={(value) => field.handleChange(value)}>
+        onValueChange={(value) => field.handleChange(value)}
+      >
         <ShadcnSelect.SelectTrigger className="w-full">
           <ShadcnSelect.SelectValue placeholder={placeholder} />
         </ShadcnSelect.SelectTrigger>

@@ -92,7 +92,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <body className="flex flex-col min-h-screen bg-zinc-950 dark">
         <ConvexBetterAuthProvider
           client={context.convexQueryClient.convexClient}
-          authClient={authClient}>
+          authClient={authClient}
+        >
           <Header />
           {children}
           <Toaster richColors closeButton />

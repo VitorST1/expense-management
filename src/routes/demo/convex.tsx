@@ -48,7 +48,8 @@ function ConvexTodos() {
       style={{
         background:
           "linear-gradient(135deg, #667a56 0%, #8fbc8f 25%, #90ee90 50%, #98fb98 75%, #f0fff0 100%)",
-      }}>
+      }}
+    >
       <div className="w-full max-w-2xl">
         {/* Header Card */}
         <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-green-200/50 p-8 mb-6">
@@ -88,7 +89,8 @@ function ConvexTodos() {
             <button
               onClick={handleAddTodo}
               disabled={!newTodo.trim()}
-              className="bg-linear-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-xl">
+              className="bg-linear-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-xl"
+            >
               <Plus size={20} />
               Add
             </button>
@@ -122,14 +124,16 @@ function ConvexTodos() {
                   }`}
                   style={{
                     animationDelay: `${index * 50}ms`,
-                  }}>
+                  }}
+                >
                   <button
                     onClick={() => handleToggleTodo(todo._id)}
                     className={`shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${
                       todo.completed
                         ? "bg-green-500 border-green-500 text-white"
                         : "border-green-300 hover:border-green-400 text-transparent hover:text-green-400"
-                    }`}>
+                    }`}
+                  >
                     <Check size={14} />
                   </button>
 
@@ -138,13 +142,15 @@ function ConvexTodos() {
                       todo.completed
                         ? "line-through text-gray-500"
                         : "text-gray-800"
-                    }`}>
+                    }`}
+                  >
                     {todo.text}
                   </span>
 
                   <button
                     onClick={() => handleRemoveTodo(todo._id)}
-                    className="shrink-0 p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                    className="shrink-0 p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                  >
                     <Trash2 size={18} />
                   </button>
                 </div>

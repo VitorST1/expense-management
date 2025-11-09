@@ -30,7 +30,8 @@ export const columns = ({
               <EditCategoryDialog category={category}>
                 <Button
                   className="bg-blue-500 text-zinc-100 hover:bg-blue-700"
-                  size="icon-sm">
+                  size="icon-sm"
+                >
                   <PencilIcon />
                 </Button>
               </EditCategoryDialog>
@@ -38,7 +39,8 @@ export const columns = ({
             <TooltipContent
               className="bg-blue-700 text-zinc-100"
               arrowClassName="bg-blue-700 fill-blue-700"
-              side="bottom">
+              side="bottom"
+            >
               {m.edit()}
             </TooltipContent>
           </Tooltip>
@@ -49,7 +51,8 @@ export const columns = ({
                 <AlertDialogTrigger asChild>
                   <Button
                     className="bg-red-500 text-zinc-100 hover:bg-red-700"
-                    size="icon-sm">
+                    size="icon-sm"
+                  >
                     <Trash2Icon />
                   </Button>
                 </AlertDialogTrigger>
@@ -57,7 +60,8 @@ export const columns = ({
               <TooltipContent
                 className="bg-red-700 text-zinc-100"
                 arrowClassName="bg-red-700 fill-red-700"
-                side="bottom">
+                side="bottom"
+              >
                 {m.delete()}
               </TooltipContent>
             </Tooltip>

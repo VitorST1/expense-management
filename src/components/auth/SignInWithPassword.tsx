@@ -111,7 +111,8 @@ export function SignInWithPassword({
           signUp(formData)
           return
         }
-      }}>
+      }}
+    >
       {flow === "signUp" && (
         <>
           <label htmlFor="name">{m.name()}</label>
@@ -127,7 +128,8 @@ export function SignInWithPassword({
             className="p-0 h-auto"
             type="button"
             variant="link"
-            onClick={handlePasswordReset}>
+            onClick={handlePasswordReset}
+          >
             {m.forgot_password()}
           </Button>
         ) : null}
@@ -153,7 +155,8 @@ export function SignInWithPassword({
         type="button"
         onClick={() => {
           setFlow(flow === "signIn" ? "signUp" : "signIn")
-        }}>
+        }}
+      >
         {flow === "signIn"
           ? `${m.dont_have_an_account()} ${m.sign_up()}`
           : `${m.already_have_an_account()} ${m.sign_in()}`}

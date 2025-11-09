@@ -73,7 +73,8 @@ export default function EditCategoryDialog({
             e.preventDefault()
             e.stopPropagation()
             form.handleSubmit()
-          }}>
+          }}
+        >
           <div className="space-y-4">
             <form.AppField name="name">
               {(field) => {
