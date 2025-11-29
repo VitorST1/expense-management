@@ -38,6 +38,7 @@ export const getPaginated = query({
     return await ctx.db
       .query("categories")
       .withIndex("by_user", (q) => q.eq("userId", user._id))
+      .order("desc")
       .paginate(args.paginationOpts)
   },
 })
