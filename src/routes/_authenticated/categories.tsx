@@ -8,7 +8,9 @@ export const Route = createFileRoute("/_authenticated/categories")({
   component: RouteComponent,
   loader: async (opts) => {
     await opts.context.queryClient.ensureQueryData(
-      convexQuery(api.categories.get, {}),
+      convexQuery(api.categories.getPaginated, {
+        paginationOpts: { numItems: 10, cursor: null },
+      }),
     )
   },
 })

@@ -10,6 +10,7 @@
     "lint": "oxlint --fix"
   },
   "dependencies": {
+    "@convex-dev/aggregate": "^0.2.0",
     "@convex-dev/better-auth": "^0.9.6",
     "@convex-dev/react-query": "0.0.0-alpha.11",
     "@radix-ui/react-alert-dialog": "^1.1.15",

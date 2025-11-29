@@ -1,4 +1,5 @@
 import { mutation, query } from "./_generated/server"
+import { components } from "./_generated/api"
 import { ConvexError, v } from "convex/values"
 import { safeGetUser } from "./auth"
 import schema from "./schema"
@@ -25,6 +26,44 @@ export const get = query({
   },
 })
 
+export const getPaginated = query({
+  args: { paginationOpts: v.any() },
+  handler: async (ctx, args) => {
+    const user = await safeGetUser(ctx)
+
+    if (!user) {
+      throw new ConvexError("User is not authenticated")
+    }
+
+    return await ctx.db
+      .query("categories")
+      .withIndex("by_user", (q) => q.eq("userId", user._id))
+      .paginate(args.paginationOpts)
+  },
+})
+
+export const count = query({
+  args: {},
+  handler: async (ctx) => {
+    const user = await safeGetUser(ctx)
+
+    if (!user) {
+      return 0
+    }
+
+    if (!user) {
+      return 0
+    }
+
+    const aggregate = await ctx.runQuery(
+      components.aggregate.btree.aggregateBetween,
+      { namespace: user._id },
+    )
+
+    return aggregate.count
+  },
+})
+
 export const create = mutation({
   args: fieldsWithoutUserId,
   handler: async (ctx, fields) => {
@@ -37,10 +76,19 @@ export const create = mutation({
       throw new ConvexError("Name cannot be empty")
     }
 
-    return await ctx.db.insert("categories", {
+    const id = await ctx.db.insert("categories", {
       ...fields,
       userId: user._id,
     })
+
+    await ctx.runMutation(components.aggregate.public.insert, {
+      key: id,
+      namespace: user._id,
+      summand: 1,
+      value: null,
+    })
+
+    return id
   },
 })
 
@@ -67,6 +115,13 @@ export const remove = mutation({
       return
     }
 
-    return await ctx.db.delete(args.id)
+    await ctx.db.delete(args.id)
+
+    await ctx.db.delete(args.id)
+
+    await ctx.runMutation(components.aggregate.public.delete_, {
+      key: args.id,
+      namespace: user._id,
+    })
   },
 })
