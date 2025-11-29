@@ -115,7 +115,7 @@ export function DataTable<TData, TValue>({
         </TableBody>
       </Table>
     </div>
-    {manualPagination ? (
+    {manualPagination && rowCount && rowCount > 10 ? (
       <div className="flex items-center justify-end gap-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
           {m.showing_range_of_total({
