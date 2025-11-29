@@ -51,10 +51,6 @@ export const count = query({
       return 0
     }
 
-    if (!user) {
-      return 0
-    }
-
     const aggregate = await ctx.runQuery(
       components.aggregate.btree.aggregateBetween,
       { namespace: user._id },
@@ -114,8 +110,6 @@ export const remove = mutation({
     if (!user) {
       return
     }
-
-    await ctx.db.delete(args.id)
 
     await ctx.db.delete(args.id)
 
