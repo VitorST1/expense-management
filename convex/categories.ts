@@ -16,7 +16,7 @@ export const get = query({
     const user = await safeGetUser(ctx)
 
     if (!user) {
-      return []
+      throw new ConvexError("User is not authenticated")
     }
 
     return await ctx.db
@@ -48,7 +48,7 @@ export const count = query({
     const user = await safeGetUser(ctx)
 
     if (!user) {
-      return 0
+      throw new ConvexError("User is not authenticated")
     }
 
     const aggregate = await ctx.runQuery(
@@ -65,7 +65,7 @@ export const create = mutation({
   handler: async (ctx, fields) => {
     const user = await safeGetUser(ctx)
     if (!user) {
-      return
+      throw new ConvexError("User is not authenticated")
     }
 
     if (!fields.name) {
@@ -96,7 +96,7 @@ export const update = mutation({
   handler: async (ctx, args) => {
     const user = await safeGetUser(ctx)
     if (!user) {
-      return
+      throw new ConvexError("User is not authenticated")
     }
 
     return await ctx.db.patch(args.id, args.update)
@@ -108,7 +108,7 @@ export const remove = mutation({
   handler: async (ctx, args) => {
     const user = await safeGetUser(ctx)
     if (!user) {
-      return
+      throw new ConvexError("User is not authenticated")
     }
 
     await ctx.db.delete(args.id)
