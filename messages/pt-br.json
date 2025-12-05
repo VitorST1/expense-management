@@ -27,6 +27,7 @@
   "go_back": "Voltar",
   "start_over": "Início",
   "category": "Categoria",
+  "categories": "Categorias",
   "add_new_category": "Adicionar nova categoria",
   "add_category": "Adicionar categoria",
   "category_name": "Nome da categoria",
@@ -47,5 +48,6 @@
   "go_to_first_page": "Ir para a primeira página",
   "go_to_previous_page": "Ir para a página anterior",
   "go_to_next_page": "Ir para a próxima página",
-  "go_to_last_page": "Ir para a última página"
+  "go_to_last_page": "Ir para a última página",
+  "home": "Início"
 }
