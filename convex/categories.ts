@@ -55,7 +55,7 @@ export const count = query({
 
     const aggregate = await ctx.runQuery(
       components.aggregate.btree.aggregateBetween,
-      { namespace: user._id },
+      { namespace: [user._id, "categories"] },
     )
 
     return aggregate.count
@@ -81,7 +81,7 @@ export const create = mutation({
 
     await ctx.runMutation(components.aggregate.public.insert, {
       key: id,
-      namespace: user._id,
+      namespace: [user._id, "categories"],
       summand: 1,
       value: null,
     })
@@ -117,7 +117,7 @@ export const remove = mutation({
 
     await ctx.runMutation(components.aggregate.public.delete_, {
       key: args.id,
-      namespace: user._id,
+      namespace: [user._id, "categories"],
     })
   },
 })
