@@ -18,6 +18,6 @@ export default defineSchema({
     userId: v.string(),
   })
     .index("by_user", ["userId"])
-    .index("by_category", ["category"])
-    .index("by_date", ["date"]),
+    .index("by_user_and_category", ["userId", "category"])
+    .index("by_user_and_date", ["userId", "date"]),
 })
