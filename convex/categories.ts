@@ -5,6 +5,7 @@ import { safeGetUser } from "./auth"
 import schema from "./schema"
 import { partial } from "convex-helpers/validators"
 import { omit } from "convex-helpers"
+import { paginationOptsValidator } from "convex/server"
 
 const fieldsWithoutUserId = omit(schema.tables.categories.validator.fields, [
   "userId",
@@ -27,7 +28,7 @@ export const get = query({
 })
 
 export const getPaginated = query({
-  args: { paginationOpts: v.any() },
+  args: { paginationOpts: paginationOptsValidator },
   handler: async (ctx, args) => {
     const user = await safeGetUser(ctx)
 
