@@ -26,6 +26,15 @@ export default function Header() {
             >
               {m.categories()}
             </Link>
+            <Link
+              to="/expenses"
+              className="px-4 py-2 rounded-md hover:bg-zinc-800 transition-colors font-bold"
+              activeProps={{
+                className: "underline",
+              }}
+            >
+              {m.expenses()}
+            </Link>
           </Authenticated>
         </div>
         <div className="flex items-center justify-end-safe gap-4">
