@@ -1,5 +1,5 @@
 import { mutation, query } from "./_generated/server"
-import { v } from "convex/values"
+import { ConvexError, v } from "convex/values"
 import { safeGetUser } from "./auth"
 import schema from "./schema"
 import { omit } from "convex-helpers"
@@ -15,7 +15,7 @@ export const get = query({
     const user = await safeGetUser(ctx)
 
     if (!user) {
-      return []
+      throw new ConvexError("User is not authenticated")
     }
 
     return await ctx.db
@@ -30,7 +30,7 @@ export const create = mutation({
   handler: async (ctx, fields) => {
     const user = await safeGetUser(ctx)
     if (!user) {
-      return
+      throw new ConvexError("User is not authenticated")
     }
 
     return await ctx.db.insert("expenses", {
@@ -48,7 +48,7 @@ export const update = mutation({
   handler: async (ctx, args) => {
     const user = await safeGetUser(ctx)
     if (!user) {
-      return
+      throw new ConvexError("User is not authenticated")
     }
 
     return await ctx.db.patch(args.id, args.update)
@@ -60,7 +60,7 @@ export const remove = mutation({
   handler: async (ctx, args) => {
     const user = await safeGetUser(ctx)
     if (!user) {
-      return
+      throw new ConvexError("User is not authenticated")
     }
 
     return await ctx.db.delete(args.id)
