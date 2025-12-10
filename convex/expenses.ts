@@ -36,11 +36,27 @@ export const getPaginated = query({
       throw new ConvexError("User is not authenticated")
     }
 
-    return await ctx.db
+    const result = await ctx.db
       .query("expenses")
       .withIndex("by_user", (q) => q.eq("userId", user._id))
       .order("desc")
       .paginate(args.paginationOpts)
+
+    // Join categories for the current page
+    const pageWithCategory = await Promise.all(
+      result.page.map(async (expense) => {
+        const category = await ctx.db.get(expense.category)
+        return {
+          ...expense,
+          categoryName: category?.name ?? "-",
+        }
+      }),
+    )
+
+    return {
+      ...result,
+      page: pageWithCategory,
+    }
   },
 })
 
