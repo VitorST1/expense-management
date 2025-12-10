@@ -17,6 +17,7 @@
   "error_could_not_sign_in": "Não foi possível logar, você queria criar uma conta?",
   "error_could_not_sign_up": "Não foi possível criar uma conta, você queria logar?",
   "error_email_already_exists": "Um usuário com esse email já existe. Por favor, logue.",
+  "error_amount_must_be_positive": "Valor deve ser positivo",
   "error_invalid_email": "Email inválido",
   "password_requirements": "Pelo menos 8 caracteres",
   "lang_en": "Inglês",
@@ -50,5 +51,12 @@
   "go_to_next_page": "Ir para a próxima página",
   "go_to_last_page": "Ir para a última página",
   "home": "Início",
-  "expenses": "Despesas"
+  "expenses": "Despesas",
+  "expense": "Despesa",
+  "amount": "Valor",
+  "date": "Data",
+  "description": "Descrição",
+  "select_category": "Selecione uma categoria",
+  "edit_expense": "Editar Despesa",
+  "add_expense": "Adicionar Despesa"
 }

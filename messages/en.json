@@ -18,6 +18,7 @@
   "error_could_not_sign_up": "Could not sign up, did you mean to sign in?",
   "error_email_already_exists": "User with this email already exists. Please sign in.",
   "error_invalid_email": "Invalid email",
+  "error_amount_must_be_positive": "Amount must be positive",
   "password_requirements": "At least 8 characters long",
   "lang_en": "English",
   "lang_pt_br": "Portuguese",
@@ -50,5 +51,13 @@
   "go_to_next_page": "Go to next page",
   "go_to_last_page": "Go to last page",
   "home": "Home",
-  "expenses": "Expenses"
+  "expenses": "Expenses",
+  "expense": "Expense",
+  "expenses_description": "Manage your expenses",
+  "amount": "Amount",
+  "date": "Date",
+  "description": "Description",
+  "select_category": "Select a category",
+  "edit_expense": "Edit Expense",
+  "add_expense": "Add Expense"
 }

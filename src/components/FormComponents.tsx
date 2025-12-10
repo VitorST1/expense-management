@@ -9,6 +9,18 @@ import * as ShadcnSelect from "@/components/ui/select"
 import { Slider as ShadcnSlider } from "@/components/ui/slider"
 import { Switch as ShadcnSwitch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import { Calendar } from "@/components/ui/calendar"
+import { CalendarIcon } from "lucide-react"
+import { format } from "date-fns"
+import { cn } from "@/lib/utils"
+import { getLocale } from "@/paraglide/runtime"
+import { useEffect, useState } from "react"
+import { enUS, ptBR } from "date-fns/locale"
 
 export function SubscribeButton({ label }: { label: string }) {
   const form = useFormContext()
@@ -64,7 +76,7 @@ export function TextField({
       <Input
         id={field.name}
         name={field.name}
-        value={field.state.value}
+        value={field.state.value ?? ""}
         placeholder={placeholder}
         onBlur={field.handleBlur}
         onChange={(e) => field.handleChange(e.target.value)}
@@ -98,13 +110,138 @@ export function TextArea({
       <ShadcnTextarea
         id={field.name}
         name={field.name}
-        value={field.state.value}
+        value={field.state.value ?? ""}
         placeholder={placeholder}
         onBlur={field.handleBlur}
         onChange={(e) => field.handleChange(e.target.value)}
         rows={rows}
         aria-invalid={isInvalid}
       />
+      {field.state.meta.isTouched && <ErrorMessages errors={errors} />}
+    </div>
+  )
+}
+
+export function NumberField({
+  label,
+  placeholder,
+  isInvalid,
+}: {
+  label: string
+  placeholder?: string
+  isInvalid?: boolean
+}) {
+  const field = useFieldContext<number>()
+  const errors = useStore(field.store, (state) => state.meta.errors)
+  const [inputValue, setInputValue] = useState("")
+
+  // Update input value when field value changes externally
+  useEffect(() => {
+    if (field.state.value !== undefined && !Number.isNaN(field.state.value)) {
+      setInputValue(
+        new Intl.NumberFormat(getLocale()).format(field.state.value),
+      )
+    } else {
+      setInputValue("")
+    }
+  }, [field.state.value])
+
+  const handleBlur = () => {
+    field.handleBlur()
+    if (!inputValue) {
+      if (field.state.value !== undefined)
+        field.handleChange(undefined as unknown as number)
+      field.handleChange(undefined as unknown as number)
+      return
+    }
+
+    const locale = getLocale().toLowerCase()
+    const isPtBr = locale === "pt-br"
+    let clean = inputValue
+    if (isPtBr) {
+      // Remove thousands separator (.) and replace decimal (,) with (.)
+      clean = clean.replace(/\./g, "").replace(",", ".")
+    } else {
+      // Remove thousands separator (,)
+      clean = clean.replace(/,/g, "")
+    }
+
+    const parsed = parseFloat(clean)
+    if (!isNaN(parsed)) {
+      field.handleChange(parsed)
+      setInputValue(new Intl.NumberFormat(getLocale()).format(parsed))
+    } else {
+      field.handleChange(NaN)
+    }
+  }
+
+  return (
+    <div>
+      <Label htmlFor={field.name} className="mb-2 text-xl font-bold">
+        {label}
+      </Label>
+      <Input
+        type="text"
+        id={field.name}
+        name={field.name}
+        value={inputValue}
+        placeholder={placeholder}
+        onBlur={handleBlur}
+        onChange={(e) => setInputValue(e.target.value)}
+        aria-invalid={isInvalid}
+      />
+      {field.state.meta.isTouched && <ErrorMessages errors={errors} />}
+    </div>
+  )
+}
+
+export function DateField({
+  label,
+  isInvalid,
+}: {
+  label: string
+  isInvalid?: boolean
+}) {
+  const field = useFieldContext<number>()
+  const errors = useStore(field.store, (state) => state.meta.errors)
+
+  const date = field.state.value ? new Date(field.state.value) : undefined
+
+  return (
+    <div className="flex flex-col gap-2">
+      <Label htmlFor={field.name} className="text-xl font-bold">
+        {label}
+      </Label>
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button
+            variant={"outline"}
+            className={cn(
+              "w-full justify-start text-left font-normal",
+              !date && "text-muted-foreground",
+              isInvalid && "border-red-500",
+            )}
+            id={field.name}
+          >
+            <CalendarIcon className="mr-2 h-4 w-4" />
+            {date ? (
+              format(date, "PPP", {
+                locale: getLocale() === "pt-br" ? ptBR : enUS,
+              })
+            ) : (
+              <span></span>
+            )}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-auto p-0">
+          <Calendar
+            mode="single"
+            selected={date}
+            onSelect={(d) => field.handleChange(d?.getTime() || 0)}
+            locale={getLocale() === "pt-br" ? ptBR : enUS}
+          />
+        </PopoverContent>
+      </Popover>
       {field.state.meta.isTouched && <ErrorMessages errors={errors} />}
     </div>
   )
@@ -124,6 +261,9 @@ export function Select({
 
   return (
     <div>
+      <Label htmlFor={field.name} className="mb-2 text-xl font-bold">
+        {label}
+      </Label>
       <ShadcnSelect.Select
         name={field.name}
         value={field.state.value}
