@@ -45,7 +45,7 @@ export const getPaginated = query({
     // Join categories for the current page
     const pageWithCategory = await Promise.all(
       result.page.map(async (expense) => {
-        const category = await ctx.db.get(expense.category)
+        const category = await ctx.db.get("categories", expense.category)
         return {
           ...expense,
           categoryName: category?.name ?? "-",
@@ -113,7 +113,7 @@ export const update = mutation({
       throw new ConvexError("User is not authenticated")
     }
 
-    return await ctx.db.patch(args.id, args.update)
+    return await ctx.db.patch("expenses", args.id, args.update)
   },
 })
 
@@ -125,7 +125,7 @@ export const remove = mutation({
       throw new ConvexError("User is not authenticated")
     }
 
-    await ctx.db.delete(args.id)
+    await ctx.db.delete("expenses", args.id)
 
     await ctx.runMutation(components.aggregate.public.delete_, {
       key: args.id,

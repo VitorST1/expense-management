@@ -101,7 +101,7 @@ export const update = mutation({
       throw new ConvexError("User is not authenticated")
     }
 
-    return await ctx.db.patch(args.id, args.update)
+    return await ctx.db.patch("categories", args.id, args.update)
   },
 })
 
@@ -113,7 +113,7 @@ export const remove = mutation({
       throw new ConvexError("User is not authenticated")
     }
 
-    await ctx.db.delete(args.id)
+    await ctx.db.delete("categories", args.id)
 
     await ctx.runMutation(components.aggregate.public.delete_, {
       key: args.id,
