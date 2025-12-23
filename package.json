@@ -15,7 +15,8 @@
     "**/*.{js,ts,jsx,tsx,json}": [
       "oxlint --fix",
       "oxfmt --no-error-on-unmatched-pattern"
-    ]
+    ],
+    "!**/_generated/**": []
   },
   "dependencies": {
     "@convex-dev/aggregate": "^0.2.0",
