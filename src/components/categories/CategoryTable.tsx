@@ -7,11 +7,17 @@ import { m } from "@/paraglide/messages"
 import { Id } from "convex/_generated/dataModel"
 import { toast } from "sonner"
 import { usePaginatedQuery } from "convex/react"
+import { Input } from "../ui/input"
+import { useState } from "react"
+import { useDebounce } from "@/hooks/use-debounce.ts"
 
 export default function CategoryTable() {
+  const [search, setSearch] = useState("")
+  const debouncedSearch = useDebounce(search, 500)
+
   const { results, status, loadMore, isLoading } = usePaginatedQuery(
     api.categories.getPaginated,
-    { paginationOpts: { numItems: 20, cursor: null } },
+    { search: debouncedSearch === "" ? undefined : debouncedSearch },
     { initialNumItems: 20 },
   )
 
@@ -29,13 +35,21 @@ export default function CategoryTable() {
   }
 
   return (
-    <DataTable
-      columns={columns({ onDelete: handleDelete })}
-      data={results}
-      isLoading={isLoading}
-      onLoadMore={() => loadMore(10)}
-      hasMore={status !== "Exhausted"}
-      isLoadingMore={status === "LoadingMore"}
-    />
+    <div className="space-y-4">
+      <Input
+        placeholder={m.search()}
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className=""
+      />
+      <DataTable
+        columns={columns({ onDelete: handleDelete })}
+        data={results}
+        isLoading={isLoading}
+        onLoadMore={() => loadMore(10)}
+        hasMore={status !== "Exhausted"}
+        isLoadingMore={status === "LoadingMore"}
+      />
+    </div>
   )
 }

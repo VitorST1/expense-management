@@ -27,12 +27,24 @@ export const get = query({
 })
 
 export const getPaginated = query({
-  args: { paginationOpts: paginationOptsValidator },
+  args: {
+    paginationOpts: paginationOptsValidator,
+    search: v.optional(v.string()),
+  },
   handler: async (ctx, args) => {
     const user = await safeGetUser(ctx)
 
     if (!user) {
       throw new ConvexError("User is not authenticated")
+    }
+
+    if (args.search) {
+      return await ctx.db
+        .query("categories")
+        .withSearchIndex("search_name", (q) =>
+          q.search("name", args.search!).eq("userId", user._id),
+        )
+        .paginate(args.paginationOpts)
     }
 
     return await ctx.db

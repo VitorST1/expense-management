@@ -5,7 +5,12 @@ export default defineSchema({
   categories: defineTable({
     name: v.string(),
     userId: v.string(),
-  }).index("by_user", ["userId"]),
+  })
+    .index("by_user", ["userId"])
+    .searchIndex("search_name", {
+      searchField: "name",
+      filterFields: ["userId"],
+    }),
   expenses: defineTable({
     category: v.id("categories"),
     description: v.optional(v.string()),
