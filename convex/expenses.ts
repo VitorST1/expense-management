@@ -5,7 +5,6 @@ import schema from "./schema"
 import { omit } from "convex-helpers"
 import { partial } from "convex-helpers/validators"
 import { paginationOptsValidator } from "convex/server"
-import { components } from "./_generated/api.js"
 
 const fieldsWithoutUserId = omit(schema.tables.expenses.validator.fields, [
   "userId",
@@ -60,24 +59,6 @@ export const getPaginated = query({
   },
 })
 
-export const count = query({
-  args: {},
-  handler: async (ctx) => {
-    const user = await safeGetUser(ctx)
-
-    if (!user) {
-      return 0
-    }
-
-    const aggregate = await ctx.runQuery(
-      components.aggregate.btree.aggregateBetween,
-      { namespace: [user._id, "expenses"] },
-    )
-
-    return aggregate.count
-  },
-})
-
 export const create = mutation({
   args: fieldsWithoutUserId,
   handler: async (ctx, fields) => {
@@ -89,13 +70,6 @@ export const create = mutation({
     const id = await ctx.db.insert("expenses", {
       ...fields,
       userId: user._id,
-    })
-
-    await ctx.runMutation(components.aggregate.public.insert, {
-      key: id,
-      namespace: [user._id, "expenses"],
-      summand: 1,
-      value: null,
     })
 
     return id
@@ -126,10 +100,5 @@ export const remove = mutation({
     }
 
     await ctx.db.delete("expenses", args.id)
-
-    await ctx.runMutation(components.aggregate.public.delete_, {
-      key: args.id,
-      namespace: [user._id, "expenses"],
-    })
   },
 })

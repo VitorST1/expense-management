@@ -1,5 +1,4 @@
 import { mutation, query } from "./_generated/server"
-import { components } from "./_generated/api"
 import { ConvexError, v } from "convex/values"
 import { safeGetUser } from "./auth"
 import schema from "./schema"
@@ -44,24 +43,6 @@ export const getPaginated = query({
   },
 })
 
-export const count = query({
-  args: {},
-  handler: async (ctx) => {
-    const user = await safeGetUser(ctx)
-
-    if (!user) {
-      throw new ConvexError("User is not authenticated")
-    }
-
-    const aggregate = await ctx.runQuery(
-      components.aggregate.btree.aggregateBetween,
-      { namespace: [user._id, "categories"] },
-    )
-
-    return aggregate.count
-  },
-})
-
 export const create = mutation({
   args: fieldsWithoutUserId,
   handler: async (ctx, fields) => {
@@ -77,13 +58,6 @@ export const create = mutation({
     const id = await ctx.db.insert("categories", {
       ...fields,
       userId: user._id,
-    })
-
-    await ctx.runMutation(components.aggregate.public.insert, {
-      key: id,
-      namespace: [user._id, "categories"],
-      summand: 1,
-      value: null,
     })
 
     return id
@@ -114,10 +88,5 @@ export const remove = mutation({
     }
 
     await ctx.db.delete("categories", args.id)
-
-    await ctx.runMutation(components.aggregate.public.delete_, {
-      key: args.id,
-      namespace: [user._id, "categories"],
-    })
   },
 })

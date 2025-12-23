@@ -1,42 +1,19 @@
 import { m } from "@/paraglide/messages.js"
-import { convexQuery, useConvexMutation } from "@convex-dev/react-query"
-import { useMutation, useSuspenseQuery } from "@tanstack/react-query"
-import { PaginationState } from "@tanstack/react-table"
+import { useConvexMutation } from "@convex-dev/react-query"
+import { useMutation } from "@tanstack/react-query"
 import { api } from "convex/_generated/api"
 import { Id } from "convex/_generated/dataModel"
-import { useEffect, useState } from "react"
 import { toast } from "sonner"
 import { columns } from "./columns.tsx"
 import { DataTable } from "../ui/DataTable.tsx"
+import { usePaginatedQuery } from "convex/react"
 
 export default function ExpenseTable() {
-  const [pagination, setPagination] = useState<PaginationState>({
-    pageIndex: 0,
-    pageSize: 10,
-  })
-  const [cursors, setCursors] = useState<Record<number, string | null>>({
-    0: null,
-  })
-
-  const { data, error, isLoading } = useSuspenseQuery(
-    convexQuery(api.expenses.getPaginated, {
-      paginationOpts: {
-        numItems: pagination.pageSize,
-        cursor: cursors[pagination.pageIndex] ?? null,
-      },
-    }),
+  const { results, status, loadMore, isLoading } = usePaginatedQuery(
+    api.expenses.getPaginated,
+    { paginationOpts: { numItems: 20, cursor: null } },
+    { initialNumItems: 20 },
   )
-
-  const count = useSuspenseQuery(convexQuery(api.expenses.count, {})).data
-
-  useEffect(() => {
-    if (data?.continueCursor) {
-      setCursors((prev) => ({
-        ...prev,
-        [pagination.pageIndex + 1]: data.continueCursor,
-      }))
-    }
-  }, [data, pagination.pageIndex])
 
   const { mutateAsync: deleteExpense } = useMutation({
     mutationFn: useConvexMutation(api.expenses.remove),
@@ -51,27 +28,14 @@ export default function ExpenseTable() {
     }
   }
 
-  if (error) {
-    console.error(error)
-    return (
-      <div className="grow self-center content-center text-zinc-200">
-        {m.something_went_wrong()}
-      </div>
-    )
-  }
-
   return (
     <DataTable
       columns={columns({ onDelete: handleDelete })}
-      data={data.page}
+      data={results}
       isLoading={isLoading}
-      manualPagination
-      pageCount={
-        count === data.page.length ? 1 : Math.ceil(count / pagination.pageSize)
-      }
-      rowCount={count}
-      pagination={pagination}
-      onPaginationChange={setPagination}
+      onLoadMore={() => loadMore(10)}
+      hasMore={status !== "Exhausted"}
+      isLoadingMore={status === "LoadingMore"}
     />
   )
 }

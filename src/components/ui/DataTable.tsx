@@ -31,6 +31,7 @@ import {
   SelectValue,
 } from "./select"
 import { m } from "@/paraglide/messages"
+import { useEffect, useRef } from "react"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -41,6 +42,9 @@ interface DataTableProps<TData, TValue> {
   rowCount?: number
   onPaginationChange?: OnChangeFn<PaginationState>
   pagination?: PaginationState
+  onLoadMore?: () => void
+  hasMore?: boolean
+  isLoadingMore?: boolean
 }
 
 export function DataTable<TData, TValue>({
@@ -52,6 +56,9 @@ export function DataTable<TData, TValue>({
   rowCount,
   onPaginationChange,
   pagination,
+  onLoadMore,
+  hasMore,
+  isLoadingMore,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -65,6 +72,36 @@ export function DataTable<TData, TValue>({
       pagination,
     },
   })
+
+  // Infinite scrolling observer
+  const observerTarget = useRef(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (
+          entries[0].isIntersecting &&
+          hasMore &&
+          !isLoadingMore &&
+          !isLoading &&
+          onLoadMore
+        ) {
+          onLoadMore()
+        }
+      },
+      { threshold: 0.1 },
+    )
+
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current)
+    }
+
+    return () => {
+      if (observerTarget.current) {
+        observer.unobserve(observerTarget.current)
+      }
+    }
+  }, [hasMore, isLoadingMore, isLoading, onLoadMore])
 
   return (
     <div>
@@ -92,33 +129,52 @@ export function DataTable<TData, TValue>({
             ))}
           </TableHeader>
           <TableBody>
-            {isLoading ? (
-              Array.from({ length: 5 }).map((_, i) => (
+            {isLoading && !data.length ? (
+              Array.from({ length: 10 }).map((_, i) => (
                 <TableRow key={i}>
-                  <TableCell>
-                    <Skeleton className="h-4" />
-                  </TableCell>
-                  <TableCell>
-                    <Skeleton className="h-4" />
+                  <TableCell colSpan={columns.length}>
+                    <Skeleton className="h-8 w-full" />
                   </TableCell>
                 </TableRow>
               ))
             ) : table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
+              <>
+                {table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+                {/* Loader for infinite scroll */}
+                {onLoadMore && (
+                  <TableRow ref={observerTarget} className="border-0">
+                    <TableCell
+                      colSpan={columns.length}
+                      className="h-10 text-center p-2"
+                    >
+                      {isLoadingMore && (
+                        <div className="flex justify-center items-center py-2 animate-pulse text-muted-foreground text-sm">
+                          {m.loading_more()}
+                        </div>
+                      )}
+                      {!hasMore && data.length > 0 && (
+                        <div className="text-xs text-muted-foreground py-2">
+                          {m.no_more_results()}
+                        </div>
                       )}
                     </TableCell>
-                  ))}
-                </TableRow>
-              ))
+                  </TableRow>
+                )}
+              </>
             ) : (
               <TableRow>
                 <TableCell
@@ -132,7 +188,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      {manualPagination && rowCount && rowCount > 10 ? (
+      {manualPagination && !onLoadMore && rowCount && rowCount > 10 ? (
         <div className="flex items-center justify-end gap-2 py-4">
           <div className="flex-1 text-sm text-muted-foreground">
             {m.showing_range_of_total({

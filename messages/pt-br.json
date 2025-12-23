@@ -52,11 +52,14 @@
   "go_to_last_page": "Ir para a última página",
   "home": "Início",
   "expenses": "Despesas",
+  "expenses_description": "Gerencie suas despesas",
   "expense": "Despesa",
   "amount": "Valor",
   "date": "Data",
   "description": "Descrição",
   "select_category": "Selecione uma categoria",
   "edit_expense": "Editar Despesa",
-  "add_expense": "Adicionar Despesa"
+  "add_expense": "Adicionar Despesa",
+  "loading_more": "Carregando mais...",
+  "no_more_results": "Sem mais resultados"
 }
