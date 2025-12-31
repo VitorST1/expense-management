@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { m } from "@/paraglide/messages"
+import { getLocale } from "@/paraglide/runtime"
 
 type MessageMap = typeof m
 
@@ -34,4 +35,14 @@ export function getInternationalizationMessageFromKey({
 
 export function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+export function formatCurrency(amount: number) {
+  const locale = getLocale()
+  const currency = locale === "pt-br" ? "BRL" : "USD"
+
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: currency,
+  }).format(amount)
 }

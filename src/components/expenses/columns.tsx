@@ -8,6 +8,7 @@ import { AlertDialog, AlertDialogTrigger } from "../ui/alert-dialog"
 import DeleteDialogContent from "../ui/DeleteDialogContent"
 import ExpenseDialog from "./ExpenseDialog"
 import { getLocale } from "@/paraglide/runtime"
+import { formatCurrency } from "@/lib/utils.ts"
 
 export const columns = ({
   onDelete,
@@ -36,10 +37,7 @@ export const columns = ({
     header: m.amount(),
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("amount"))
-      const formatted = new Intl.NumberFormat(getLocale(), {
-        style: "currency",
-        currency: getLocale() === "pt-br" ? "BRL" : "USD",
-      }).format(amount)
+      const formatted = formatCurrency(amount)
       return formatted
     },
   },
