@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { MonthPicker } from "@/components/ui/month-picker"
-import { Input } from "@/components/ui/input"
+import { DebouncedInput } from "@/components/ui/debounced-input"
 import {
   Popover,
   PopoverContent,
@@ -29,8 +29,7 @@ import { ptBR, enUS } from "date-fns/locale"
 import { capitalize } from "@/lib/utils"
 
 interface ExpenseFiltersProps {
-  search: string
-  setSearch: (value: string) => void
+  onSearchChange: (value: string) => void
   category: Id<"categories"> | undefined
   setCategory: (value: Id<"categories"> | undefined) => void
   month: Date | undefined
@@ -38,8 +37,7 @@ interface ExpenseFiltersProps {
 }
 
 export function ExpenseFilters({
-  search,
-  setSearch,
+  onSearchChange,
   category,
   setCategory,
   month,
@@ -53,10 +51,10 @@ export function ExpenseFilters({
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
-      <Input
+      <DebouncedInput
         placeholder={m.search()}
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        value=""
+        onChange={onSearchChange}
         className="w-full"
       />
 

@@ -8,13 +8,11 @@ import { columns } from "./columns.tsx"
 import { DataTable } from "../ui/DataTable.tsx"
 import { usePaginatedQuery } from "convex/react"
 import { ExpenseFilters } from "./ExpenseFilters"
-import { useState } from "react"
 import { startOfMonth, endOfMonth } from "date-fns"
-import { useDebounce } from "@/hooks/use-debounce"
+import { useState } from "react"
 
 export default function ExpenseTable() {
-  const [search, setSearch] = useState("")
-  const debouncedSearch = useDebounce(search, 500)
+  const [searchQuery, setSearchQuery] = useState("")
   const [category, setCategory] = useState<Id<"categories"> | undefined>(
     undefined,
   )
@@ -23,7 +21,7 @@ export default function ExpenseTable() {
   const { results, status, loadMore, isLoading } = usePaginatedQuery(
     api.expenses.getPaginated,
     {
-      search: debouncedSearch || undefined,
+      search: searchQuery || undefined,
       category: category,
       minDate: month ? startOfMonth(month).getTime() : undefined,
       maxDate: month ? endOfMonth(month).getTime() : undefined,
@@ -47,8 +45,7 @@ export default function ExpenseTable() {
   return (
     <div className="space-y-4">
       <ExpenseFilters
-        search={search}
-        setSearch={setSearch}
+        onSearchChange={setSearchQuery}
         category={category}
         setCategory={setCategory}
         month={month}

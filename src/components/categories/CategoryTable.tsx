@@ -7,17 +7,15 @@ import { m } from "@/paraglide/messages"
 import { Id } from "convex/_generated/dataModel"
 import { toast } from "sonner"
 import { usePaginatedQuery } from "convex/react"
-import { Input } from "../ui/input"
+import { DebouncedInput } from "../ui/debounced-input"
 import { useState } from "react"
-import { useDebounce } from "@/hooks/use-debounce.ts"
 
 export default function CategoryTable() {
   const [search, setSearch] = useState("")
-  const debouncedSearch = useDebounce(search, 500)
 
   const { results, status, loadMore, isLoading } = usePaginatedQuery(
     api.categories.getPaginated,
-    { search: debouncedSearch === "" ? undefined : debouncedSearch },
+    { search: search === "" ? undefined : search },
     { initialNumItems: 20 },
   )
 
@@ -36,10 +34,10 @@ export default function CategoryTable() {
 
   return (
     <div className="space-y-4">
-      <Input
+      <DebouncedInput
         placeholder={m.search()}
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={setSearch}
         className=""
       />
       <DataTable
