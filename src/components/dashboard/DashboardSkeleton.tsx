@@ -32,7 +32,7 @@ export function DashboardSkeleton() {
             <Skeleton className="h-[350px] w-full" />
           </CardContent>
         </Card>
-        <Card className="col-span-3">
+        <Card className="col-span-4 md:col-span-3">
           <CardHeader>
             <Skeleton className="h-6 w-32 mb-2" />
             <Skeleton className="h-4 w-48" />
