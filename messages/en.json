@@ -62,5 +62,6 @@
   "add_expense": "Add Expense",
   "loading_more": "Loading more...",
   "no_more_results": "No more results",
-  "search": "Search"
+  "search": "Search",
+  "no_results_found": "No results found"
 }

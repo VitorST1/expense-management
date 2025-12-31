@@ -62,5 +62,6 @@
   "add_expense": "Adicionar Despesa",
   "loading_more": "Carregando mais...",
   "no_more_results": "Sem mais resultados",
-  "search": "Pesquisar"
+  "search": "Pesquisar",
+  "no_results_found": "Nenhum resultado encontrado"
 }

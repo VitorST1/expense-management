@@ -1,4 +1,5 @@
 import { useStore } from "@tanstack/react-form"
+import { m } from "@/paraglide/messages"
 
 import { useFieldContext, useFormContext } from "@/hooks/form-context"
 
@@ -375,7 +376,7 @@ export function ComboBox({
           <Command>
             <CommandInput placeholder={placeholder} />
             <CommandList>
-              <CommandEmpty>No results found.</CommandEmpty>
+              <CommandEmpty>{m.no_results_found()}</CommandEmpty>
               <CommandGroup>
                 {values.map((framework) => (
                   <CommandItem
