@@ -65,5 +65,21 @@
   "search": "Pesquisar",
   "no_results_found": "Nenhum resultado encontrado",
   "all_categories": "Todas as categorias",
-  "select_month": "Selecione o mês"
+  "select_month": "Selecione o mês",
+  "total_spent_month": "Gasto Total (Mês)",
+  "for_current_month": "para o mês atual",
+  "avg_daily_last_7_days": "Média Diária (Últimos 7 Dias)",
+  "average_per_day": "média por dia",
+  "weekly_spending": "Gasto Semanal",
+  "spending_last_7_days_desc": "Seus gastos nos últimos 7 dias",
+  "category_breakdown": "Gastos por Categoria",
+  "spending_by_category_desc": "Gastos por categoria (Mês Atual)",
+  "dashboard": "Dashboard",
+  "recent_activity": "Atividade Recente",
+  "recent_transactions_desc": "Suas 5 transações mais recentes",
+  "uncategorized_expense": "Despesa Sem Categoria",
+  "no_recent_activity": "Nenhuma atividade recente",
+  "dashboard_empty_state_title": "Mês tranquilo, não é?",
+  "dashboard_empty_state_desc": "Parece que você ainda não registrou nenhuma despesa este mês. Comece a adicionar para desbloquear seus insights financeiros!",
+  "add_first_expense": "Adicione sua primeira despesa"
 }
