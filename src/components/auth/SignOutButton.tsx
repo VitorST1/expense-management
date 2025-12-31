@@ -6,8 +6,8 @@ import { m } from "@/paraglide/messages"
 export default function SignOutButton() {
   const navigate = useNavigate()
 
-  const signOut = () => {
-    authClient.signOut()
+  const signOut = async () => {
+    await authClient.signOut()
     navigate({ to: "/sign-in", search: { redirect: "/" } })
   }
 
