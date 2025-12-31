@@ -7,11 +7,27 @@ import { toast } from "sonner"
 import { columns } from "./columns.tsx"
 import { DataTable } from "../ui/DataTable.tsx"
 import { usePaginatedQuery } from "convex/react"
+import { ExpenseFilters } from "./ExpenseFilters"
+import { useState } from "react"
+import { startOfMonth, endOfMonth } from "date-fns"
+import { useDebounce } from "@/hooks/use-debounce"
 
 export default function ExpenseTable() {
+  const [search, setSearch] = useState("")
+  const debouncedSearch = useDebounce(search, 500)
+  const [category, setCategory] = useState<Id<"categories"> | undefined>(
+    undefined,
+  )
+  const [month, setMonth] = useState<Date | undefined>(undefined)
+
   const { results, status, loadMore, isLoading } = usePaginatedQuery(
     api.expenses.getPaginated,
-    { paginationOpts: { numItems: 20, cursor: null } },
+    {
+      search: debouncedSearch || undefined,
+      category: category,
+      minDate: month ? startOfMonth(month).getTime() : undefined,
+      maxDate: month ? endOfMonth(month).getTime() : undefined,
+    },
     { initialNumItems: 20 },
   )
 
@@ -29,13 +45,23 @@ export default function ExpenseTable() {
   }
 
   return (
-    <DataTable
-      columns={columns({ onDelete: handleDelete })}
-      data={results}
-      isLoading={isLoading}
-      onLoadMore={() => loadMore(10)}
-      hasMore={status !== "Exhausted"}
-      isLoadingMore={status === "LoadingMore"}
-    />
+    <div className="space-y-4">
+      <ExpenseFilters
+        search={search}
+        setSearch={setSearch}
+        category={category}
+        setCategory={setCategory}
+        month={month}
+        setMonth={setMonth}
+      />
+      <DataTable
+        columns={columns({ onDelete: handleDelete })}
+        data={results}
+        isLoading={isLoading}
+        onLoadMore={() => loadMore(10)}
+        hasMore={status !== "Exhausted"}
+        isLoadingMore={status === "LoadingMore"}
+      />
+    </div>
   )
 }

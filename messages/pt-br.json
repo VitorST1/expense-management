@@ -63,5 +63,7 @@
   "loading_more": "Carregando mais...",
   "no_more_results": "Sem mais resultados",
   "search": "Pesquisar",
-  "no_results_found": "Nenhum resultado encontrado"
+  "no_results_found": "Nenhum resultado encontrado",
+  "all_categories": "Todas as categorias",
+  "select_month": "Selecione o mês"
 }

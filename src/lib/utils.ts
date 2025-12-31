@@ -29,5 +29,9 @@ export function getInternationalizationMessageFromKey({
   const key = `${prefix}${normalized}` as keyof MessageMap
   const msgFn = m[key]
 
-  return typeof msgFn === "function" ? msgFn() : fallback
+  return typeof msgFn === "function" ? (msgFn as () => string)() : fallback
+}
+
+export function capitalize(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1)
 }

@@ -27,7 +27,13 @@ export const get = query({
 })
 
 export const getPaginated = query({
-  args: { paginationOpts: paginationOptsValidator },
+  args: {
+    paginationOpts: paginationOptsValidator,
+    search: v.optional(v.string()),
+    category: v.optional(v.id("categories")),
+    minDate: v.optional(v.number()),
+    maxDate: v.optional(v.number()),
+  },
   handler: async (ctx, args) => {
     const user = await safeGetUser(ctx)
 
@@ -35,13 +41,66 @@ export const getPaginated = query({
       throw new ConvexError("User is not authenticated")
     }
 
-    const result = await ctx.db
-      .query("expenses")
-      .withIndex("by_user", (q) => q.eq("userId", user._id))
-      .order("desc")
-      .paginate(args.paginationOpts)
+    if (args.search) {
+      const searchResult = await ctx.db
+        .query("expenses")
+        .withSearchIndex("search_description", (q) => {
+          let qBuilder = q
+            .search("description", args.search!)
+            .eq("userId", user._id)
+          if (args.category) {
+            qBuilder = qBuilder.eq("category", args.category)
+          }
+          return qBuilder
+        })
+        .paginate(args.paginationOpts)
 
-    // Join categories for the current page
+      const pageWithCategory = await Promise.all(
+        searchResult.page.map(async (expense) => {
+          const category = await ctx.db.get("categories", expense.category)
+          return {
+            ...expense,
+            categoryName: category?.name ?? "-",
+          }
+        }),
+      )
+      return { ...searchResult, page: pageWithCategory }
+    }
+
+    let query
+
+    if (args.category) {
+      query = ctx.db
+        .query("expenses")
+        .withIndex("by_user_category_date", (q) => {
+          const qBuilder = q
+            .eq("userId", user._id)
+            .eq("category", args.category!)
+          if (args.minDate && args.maxDate) {
+            return qBuilder.gte("date", args.minDate).lte("date", args.maxDate)
+          } else if (args.minDate) {
+            return qBuilder.gte("date", args.minDate)
+          } else if (args.maxDate) {
+            return qBuilder.lte("date", args.maxDate)
+          }
+          return qBuilder
+        })
+    } else {
+      query = ctx.db.query("expenses").withIndex("by_user_and_date", (q) => {
+        const qBuilder = q.eq("userId", user._id)
+        if (args.minDate && args.maxDate) {
+          return qBuilder.gte("date", args.minDate).lte("date", args.maxDate)
+        } else if (args.minDate) {
+          return qBuilder.gte("date", args.minDate)
+        } else if (args.maxDate) {
+          return qBuilder.lte("date", args.maxDate)
+        }
+        return qBuilder
+      })
+    }
+
+    const result = await query.order("desc").paginate(args.paginationOpts)
+
     const pageWithCategory = await Promise.all(
       result.page.map(async (expense) => {
         const category = await ctx.db.get("categories", expense.category)

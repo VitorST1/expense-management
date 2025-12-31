@@ -20,5 +20,10 @@ export default defineSchema({
   })
     .index("by_user", ["userId"])
     .index("by_user_and_category", ["userId", "category"])
-    .index("by_user_and_date", ["userId", "date"]),
+    .index("by_user_and_date", ["userId", "date"])
+    .index("by_user_category_date", ["userId", "category", "date"])
+    .searchIndex("search_description", {
+      searchField: "description",
+      filterFields: ["userId", "category"],
+    }),
 })
