@@ -21,6 +21,15 @@ import { cn } from "@/lib/utils"
 import { getLocale } from "@/paraglide/runtime"
 import { useEffect, useState } from "react"
 import { enUS, ptBR } from "date-fns/locale"
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command"
+import { Check, ChevronsUpDown } from "lucide-react"
 
 export function SubscribeButton({ label }: { label: string }) {
   const form = useFormContext()
@@ -323,6 +332,76 @@ export function Switch({ label }: { label: string }) {
         />
         <Label htmlFor={label}>{label}</Label>
       </div>
+      {field.state.meta.isTouched && <ErrorMessages errors={errors} />}
+    </div>
+  )
+}
+
+export function ComboBox({
+  label,
+  values,
+  placeholder,
+}: {
+  label: string
+  values: Array<{ label: string; value: string }>
+  placeholder?: string
+}) {
+  const field = useFieldContext<string>()
+  const errors = useStore(field.store, (state) => state.meta.errors)
+  const [open, setOpen] = useState(false)
+
+  return (
+    <div className="flex flex-col gap-2">
+      <Label htmlFor={field.name} className="text-xl font-bold">
+        {label}
+      </Label>
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
+            role="combobox"
+            aria-expanded={open}
+            className="w-full justify-between"
+          >
+            {field.state.value
+              ? values.find(
+                  (framework) => framework.value === field.state.value,
+                )?.label
+              : placeholder}
+            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="p-0" align="start">
+          <Command>
+            <CommandInput placeholder={placeholder} />
+            <CommandList>
+              <CommandEmpty>No results found.</CommandEmpty>
+              <CommandGroup>
+                {values.map((framework) => (
+                  <CommandItem
+                    key={framework.value}
+                    value={framework.label}
+                    onSelect={() => {
+                      field.handleChange(framework.value)
+                      setOpen(false)
+                    }}
+                  >
+                    <Check
+                      className={cn(
+                        "mr-2 h-4 w-4",
+                        field.state.value === framework.value
+                          ? "opacity-100"
+                          : "opacity-0",
+                      )}
+                    />
+                    {framework.label}
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </CommandList>
+          </Command>
+        </PopoverContent>
+      </Popover>
       {field.state.meta.isTouched && <ErrorMessages errors={errors} />}
     </div>
   )

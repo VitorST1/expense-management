@@ -118,7 +118,7 @@ export default function ExpenseDialog({
           <div className="space-y-4">
             <form.AppField name="category">
               {(field) => (
-                <field.Select
+                <field.ComboBox
                   label={m.category()}
                   placeholder={m.select_category()}
                   values={categories.map((c) => ({
