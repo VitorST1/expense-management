@@ -1,4 +1,5 @@
 import { mutation, query } from "./_generated/server"
+import { internal } from "./_generated/api"
 import { ConvexError, v } from "convex/values"
 import { safeGetUser } from "./auth"
 import schema from "./schema"
@@ -100,5 +101,10 @@ export const remove = mutation({
     }
 
     await ctx.db.delete("categories", args.id)
+
+    await ctx.scheduler.runAfter(0, internal.expenses.deleteExpensesRecursive, {
+      categoryId: args.id,
+      userId: user._id,
+    })
   },
 })

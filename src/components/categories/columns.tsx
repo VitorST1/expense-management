@@ -68,7 +68,7 @@ export const columns = ({
 
             <DeleteDialogContent
               title={m.delete_confirm_title({ item: m.category() })}
-              description={m.delete_confirm_description({
+              description={m.delete_category_confirm_description({
                 name: category.name,
               })}
               onDelete={() => onDelete(category._id)}

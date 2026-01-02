@@ -42,6 +42,7 @@
   "delete": "Delete",
   "delete_confirm_title": "Delete {item}?",
   "delete_confirm_description": "Are you sure you want to delete “{name}”?",
+  "delete_category_confirm_description": "Are you sure you want to delete “{name}”? This will also delete all expenses associated with this category.",
   "save": "Save",
   "rows_per_page": "Rows per page",
   "page_x_of_y": "Page {current} of {total}",

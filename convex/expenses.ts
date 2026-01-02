@@ -1,4 +1,5 @@
-import { mutation, query } from "./_generated/server"
+import { internalMutation, mutation, query } from "./_generated/server"
+import { internal } from "./_generated/api"
 import { ConvexError, v } from "convex/values"
 import { safeGetUser } from "./auth"
 import schema from "./schema"
@@ -159,5 +160,41 @@ export const remove = mutation({
     }
 
     await ctx.db.delete("expenses", args.id)
+  },
+})
+
+export const deleteExpensesRecursive = internalMutation({
+  args: {
+    categoryId: v.id("categories"),
+    userId: v.string(),
+    limit: v.optional(v.number()),
+  },
+  handler: async (ctx, args) => {
+    const limit = args.limit ?? 100
+
+    const expenses = await ctx.db
+      .query("expenses")
+      .withIndex("by_user_and_category", (q) =>
+        q.eq("userId", args.userId).eq("category", args.categoryId),
+      )
+      .take(limit)
+
+    if (expenses.length > 0) {
+      for (const expense of expenses) {
+        await ctx.db.delete("expenses", expense._id)
+      }
+
+      if (expenses.length === limit) {
+        await ctx.scheduler.runAfter(
+          0,
+          internal.expenses.deleteExpensesRecursive,
+          {
+            categoryId: args.categoryId,
+            userId: args.userId,
+            limit,
+          },
+        )
+      }
+    }
   },
 })
