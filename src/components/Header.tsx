@@ -5,7 +5,7 @@ import { m } from "@/paraglide/messages.js"
 import { Link } from "@tanstack/react-router"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
-import { Menu } from "lucide-react"
+import { Banknote, LayoutDashboard, Menu, Tags } from "lucide-react"
 
 import { useState } from "react"
 
@@ -36,26 +36,29 @@ export default function Header() {
                   <nav className="flex flex-col gap-5 px-4 mt-8">
                     <Link
                       to="/"
-                      className="text-lg font-semibold hover:text-primary transition-colors"
-                      activeProps={{ className: "text-primary" }}
+                      className="flex items-center gap-3 px-4 py-3 text-lg font-semibold rounded-lg hover:bg-zinc-800 hover:text-primary transition-all duration-200"
+                      activeProps={{ className: "text-primary bg-zinc-800/50" }}
                       onClick={() => setIsOpen(false)}
                     >
+                      <LayoutDashboard className="size-5" />
                       {m.home()}
                     </Link>
                     <Link
                       to="/categories"
-                      className="text-lg font-semibold hover:text-primary transition-colors"
-                      activeProps={{ className: "text-primary" }}
+                      className="flex items-center gap-3 px-4 py-3 text-lg font-semibold rounded-lg hover:bg-zinc-800 hover:text-primary transition-all duration-200"
+                      activeProps={{ className: "text-primary bg-zinc-800/50" }}
                       onClick={() => setIsOpen(false)}
                     >
+                      <Tags className="size-5" />
                       {m.categories()}
                     </Link>
                     <Link
                       to="/expenses"
-                      className="text-lg font-semibold hover:text-primary transition-colors"
-                      activeProps={{ className: "text-primary" }}
+                      className="flex items-center gap-3 px-4 py-3 text-lg font-semibold rounded-lg hover:bg-zinc-800 hover:text-primary transition-all duration-200"
+                      activeProps={{ className: "text-primary bg-zinc-800/50" }}
                       onClick={() => setIsOpen(false)}
                     >
+                      <Banknote className="size-5" />
                       {m.expenses()}
                     </Link>
                   </nav>
