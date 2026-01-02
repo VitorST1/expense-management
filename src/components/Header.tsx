@@ -15,9 +15,8 @@ export default function Header() {
   return (
     <>
       <header className="p-4 flex items-center justify-between bg-zinc-950 border-b border-zinc-700 shadow-lg sticky top-0 z-50">
-        <div></div>
-        <Authenticated>
-          <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4">
+          <Authenticated>
             <div className="md:hidden">
               <Sheet open={isOpen} onOpenChange={setIsOpen}>
                 <SheetTrigger asChild>
@@ -63,8 +62,10 @@ export default function Header() {
                 </SheetContent>
               </Sheet>
             </div>
-          </div>
-          <div className="hidden md:flex justify-center flex-1">
+          </Authenticated>
+        </div>
+        <div className="hidden md:flex justify-center flex-1">
+          <Authenticated>
             <Link
               to="/"
               className="px-4 py-2 rounded-md hover:bg-zinc-800 transition-colors font-bold"
@@ -89,8 +90,8 @@ export default function Header() {
             >
               {m.expenses()}
             </Link>
-          </div>
-        </Authenticated>
+          </Authenticated>
+        </div>
         <div className="flex items-center gap-4">
           <PopoverLanguage />
           <Authenticated>
