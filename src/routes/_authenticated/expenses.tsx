@@ -8,7 +8,7 @@ export const Route = createFileRoute("/_authenticated/expenses")({
 
 function RouteComponent() {
   return (
-    <div className="flex flex-col grow gap-4 p-4">
+    <div className="flex flex-col grow gap-4 p-8 pt-6">
       <ExpenseItem />
       <ExpenseTable />
     </div>

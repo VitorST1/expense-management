@@ -14,7 +14,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="p-4 flex items-center justify-between bg-zinc-950 border-b border-zinc-700 shadow-lg sticky top-0 z-50">
+      <header className="py-4 px-8 flex items-center justify-between bg-zinc-950 border-b border-zinc-700 shadow-lg sticky top-0 z-50">
         <div className="flex items-center gap-4">
           <Authenticated>
             <div className="md:hidden">
