@@ -4,8 +4,6 @@ import {
   createRootRouteWithContext,
   useRouteContext,
 } from "@tanstack/react-router"
-import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
-import { TanStackDevtools } from "@tanstack/react-devtools"
 import { createServerFn } from "@tanstack/react-start"
 import { ConvexQueryClient } from "@convex-dev/react-query"
 import { getCookie, getRequest } from "@tanstack/react-start/server"
@@ -18,8 +16,6 @@ import { authClient } from "@/lib/auth-client"
 import { getLocale } from "@/paraglide/runtime"
 
 import Header from "../components/Header"
-
-import TanStackQueryDevtools from "../integrations/tanstack-query/devtools"
 
 import appCss from "../styles.css?url"
 
@@ -97,7 +93,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           <Header />
           {children}
           <Toaster richColors closeButton />
-          <TanStackDevtools
+          {/* <TanStackDevtools
             config={{
               position: "bottom-right",
             }}
@@ -108,7 +104,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
               },
               TanStackQueryDevtools,
             ]}
-          />
+          /> */}
         </ConvexBetterAuthProvider>
         <Scripts />
       </body>

@@ -1,6 +1,6 @@
 {
-  "short_name": "TanStack App",
-  "name": "Create TanStack App Sample",
+  "short_name": "Expense Management",
+  "name": "Expense Management",
   "icons": [
     {
       "src": "favicon.ico",
