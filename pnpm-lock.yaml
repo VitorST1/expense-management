@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@convex-dev/aggregate':
-        specifier: ^0.2.0
-        version: 0.2.0(convex@1.31.2(react@19.2.3))
       '@convex-dev/better-auth':
         specifier: ^0.9.11
         version: 0.9.11(@standard-schema/spec@1.1.0)(better-auth@1.3.27(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(solid-js@1.9.9))(convex@1.31.2(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@5.9.3)
@@ -322,11 +319,6 @@ packages:
 
   '@better-fetch/fetch@1.1.18':
     resolution: {integrity: sha512-rEFOE1MYIsBmoMJtQbl32PGHHXuG2hDxvEd7rUHE0vCBoFQVSDqaVs9hkZEtHCxRoY+CljXKFCOuJ8uxqw1LcA==}
-
-  '@convex-dev/aggregate@0.2.0':
-    resolution: {integrity: sha512-AKHa6SilQ9w1gnqBghCbQj77sdE2SJSZ8n3FHH/0PX/MSHsvmDT6Z+ZzIVK6EnmqItwxyRAIfA2E+znnHQVvOQ==}
-    peerDependencies:
-      convex: ^1.24.8
 
   '@convex-dev/auth@0.0.83':
     resolution: {integrity: sha512-KJPI9x3U1KcHNE/7pA7B92sVsHWpAfg6vWuO005OWNF359eRJ3ZP3W+iNfuMajZLqywudR2+oVoGDnBIFrM63A==}
@@ -3700,10 +3692,6 @@ snapshots:
   '@better-auth/utils@0.3.0': {}
 
   '@better-fetch/fetch@1.1.18': {}
-
-  '@convex-dev/aggregate@0.2.0(convex@1.31.2(react@19.2.3))':
-    dependencies:
-      convex: 1.31.2(react@19.2.3)
 
   '@convex-dev/auth@0.0.83(@auth/core@0.37.4)(convex@1.31.2(react@19.2.3))(react@19.2.3)':
     dependencies:
