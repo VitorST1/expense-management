@@ -19,6 +19,7 @@ import { expenseSchema } from "@/types/expenses.ts"
 import { Doc, Id } from "convex/_generated/dataModel"
 import { ReactNode, useState } from "react"
 import { PlusIcon } from "lucide-react"
+import AddCategoryDialog from "../categories/AddCategoryDialog"
 
 interface ExpenseDialogProps {
   expense?: Doc<"expenses">
@@ -30,6 +31,7 @@ export default function ExpenseDialog({
   children,
 }: ExpenseDialogProps) {
   const [open, setOpen] = useState(false)
+  const [addCategoryOpen, setAddCategoryOpen] = useState(false)
   const isEdit = !!expense
 
   const { data: categories } = useSuspenseQuery(
@@ -91,91 +93,105 @@ export default function ExpenseDialog({
   })
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        {children ? (
-          children
-        ) : (
-          <Button className="w-fit self-end-safe">
-            <PlusIcon className="size-4" />
-            {m.add_expense()}
-          </Button>
-        )}
-      </DialogTrigger>
-      <DialogContent aria-describedby={undefined}>
-        <DialogHeader className="sr-only">
-          <DialogTitle>
-            {isEdit ? m.edit_expense() : m.add_expense()}
-          </DialogTitle>
-        </DialogHeader>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault()
-            e.stopPropagation()
-            form.handleSubmit()
-          }}
-        >
-          <div className="space-y-4">
-            <form.AppField name="category">
-              {(field) => (
-                <field.ComboBox
-                  label={m.category()}
-                  placeholder={m.select_category()}
-                  values={categories.map((c) => ({
-                    label: c.name,
-                    value: c._id,
-                  }))}
-                />
-              )}
-            </form.AppField>
-            <form.AppField name="description">
-              {(field) => {
-                const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid
-
-                return (
-                  <field.TextField
-                    label={m.description()}
-                    placeholder={m.description()}
-                    autocomplete="off"
-                    isInvalid={isInvalid}
-                  />
-                )
-              }}
-            </form.AppField>
-            <form.AppField name="amount">
-              {(field) => {
-                const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid
-                return (
-                  <field.NumberField label={m.amount()} isInvalid={isInvalid} />
-                )
-              }}
-            </form.AppField>
-            <form.AppField name="date">
-              {(field) => {
-                const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid
-                return (
-                  <field.DateField label={m.date()} isInvalid={isInvalid} />
-                )
-              }}
-            </form.AppField>
-          </div>
-          <DialogFooter className="mt-6">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => setOpen(false)}
-            >
-              {m.cancel()}
+    <>
+      <AddCategoryDialog
+        open={addCategoryOpen}
+        onOpenChange={setAddCategoryOpen}
+        onSuccess={(id) => {
+          form.setFieldValue("category", id)
+        }}
+      />
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          {children ? (
+            children
+          ) : (
+            <Button className="w-fit self-end-safe">
+              <PlusIcon className="size-4" />
+              {m.add_expense()}
             </Button>
-            <form.AppForm>
-              <form.SubscribeButton label={m.save()} />
-            </form.AppForm>
-          </DialogFooter>
-        </form>
-      </DialogContent>
-    </Dialog>
+          )}
+        </DialogTrigger>
+        <DialogContent aria-describedby={undefined}>
+          <DialogHeader className="sr-only">
+            <DialogTitle>
+              {isEdit ? m.edit_expense() : m.add_expense()}
+            </DialogTitle>
+          </DialogHeader>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              form.handleSubmit()
+            }}
+          >
+            <div className="space-y-4">
+              <form.AppField name="category">
+                {(field) => (
+                  <field.ComboBox
+                    label={m.category()}
+                    placeholder={m.select_category()}
+                    values={categories.map((c) => ({
+                      label: c.name,
+                      value: c._id,
+                    }))}
+                    onCreate={() => setAddCategoryOpen(true)}
+                    createLabel={m.add_new_category()}
+                  />
+                )}
+              </form.AppField>
+              <form.AppField name="description">
+                {(field) => {
+                  const isInvalid =
+                    field.state.meta.isTouched && !field.state.meta.isValid
+
+                  return (
+                    <field.TextField
+                      label={m.description()}
+                      placeholder={m.description()}
+                      autocomplete="off"
+                      isInvalid={isInvalid}
+                    />
+                  )
+                }}
+              </form.AppField>
+              <form.AppField name="amount">
+                {(field) => {
+                  const isInvalid =
+                    field.state.meta.isTouched && !field.state.meta.isValid
+                  return (
+                    <field.NumberField
+                      label={m.amount()}
+                      isInvalid={isInvalid}
+                    />
+                  )
+                }}
+              </form.AppField>
+              <form.AppField name="date">
+                {(field) => {
+                  const isInvalid =
+                    field.state.meta.isTouched && !field.state.meta.isValid
+                  return (
+                    <field.DateField label={m.date()} isInvalid={isInvalid} />
+                  )
+                }}
+              </form.AppField>
+            </div>
+            <DialogFooter className="mt-6">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setOpen(false)}
+              >
+                {m.cancel()}
+              </Button>
+              <form.AppForm>
+                <form.SubscribeButton label={m.save()} />
+              </form.AppForm>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
+    </>
   )
 }

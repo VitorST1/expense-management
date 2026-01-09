@@ -30,7 +30,7 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command"
-import { Check, ChevronsUpDown } from "lucide-react"
+import { Check, ChevronsUpDown, PlusIcon } from "lucide-react"
 
 export function SubscribeButton({ label }: { label: string }) {
   const form = useFormContext()
@@ -342,10 +342,14 @@ export function ComboBox({
   label,
   values,
   placeholder,
+  onCreate,
+  createLabel = "Create new",
 }: {
   label: string
   values: Array<{ label: string; value: string }>
   placeholder?: string
+  onCreate?: () => void
+  createLabel?: string
 }) {
   const field = useFieldContext<string>()
   const errors = useStore(field.store, (state) => state.meta.errors)
@@ -398,6 +402,19 @@ export function ComboBox({
                     {framework.label}
                   </CommandItem>
                 ))}
+                {onCreate && (
+                  <CommandItem
+                    value="create_new_item_special_value"
+                    className="cursor-pointer bg-accent/20 text-accent-foreground font-semibold"
+                    onSelect={() => {
+                      onCreate()
+                      setOpen(false)
+                    }}
+                  >
+                    <PlusIcon className="mr-2 h-4 w-4" />
+                    {createLabel}
+                  </CommandItem>
+                )}
               </CommandGroup>
             </CommandList>
           </Command>
