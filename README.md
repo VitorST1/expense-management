@@ -11,7 +11,7 @@ Expense management application designed to help you take control of your finance
 -   **Secure Authentication**: Built-in authentication to keep your data private.
 -   **Multi-language Support**: Available in English and Portuguese.
 
-## getting Started
+## Getting Started
 
 To run this application locally:
 
