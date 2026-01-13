@@ -21,20 +21,12 @@ export function MonthPicker({ currentMonth, onMonthChange }: MonthPickerProps) {
 
   return (
     <div className="p-3">
-      <div className="flex items-center justify-between mb-4">
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={() => setViewYear(viewYear - 1)}
-        >
+      <div className="mb-4 flex items-center justify-between">
+        <Button variant="outline" size="icon" onClick={() => setViewYear(viewYear - 1)}>
           <ChevronLeft className="h-4 w-4" />
         </Button>
         <div className="font-semibold">{viewYear}</div>
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={() => setViewYear(viewYear + 1)}
-        >
+        <Button variant="outline" size="icon" onClick={() => setViewYear(viewYear + 1)}>
           <ChevronRight className="h-4 w-4" />
         </Button>
       </div>
@@ -49,10 +41,7 @@ export function MonthPicker({ currentMonth, onMonthChange }: MonthPickerProps) {
                 : "ghost"
             }
             onClick={() => {
-              const newDate = setYear(
-                setDateMonth(currentMonth, month.getMonth()),
-                viewYear,
-              )
+              const newDate = setYear(setDateMonth(currentMonth, month.getMonth()), viewYear)
               onMonthChange(newDate)
             }}
           >

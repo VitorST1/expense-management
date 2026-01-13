@@ -10,11 +10,7 @@ import * as ShadcnSelect from "@/components/ui/select"
 import { Slider as ShadcnSlider } from "@/components/ui/slider"
 import { Switch as ShadcnSwitch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Calendar } from "@/components/ui/calendar"
 import { CalendarIcon } from "lucide-react"
 import { format } from "date-fns"
@@ -45,17 +41,13 @@ export function SubscribeButton({ label }: { label: string }) {
   )
 }
 
-function ErrorMessages({
-  errors,
-}: {
-  errors: Array<string | { message: string }>
-}) {
+function ErrorMessages({ errors }: { errors: Array<string | { message: string }> }) {
   return (
     <>
       {errors.map((error) => (
         <div
           key={typeof error === "string" ? error : error.message}
-          className="text-red-500 mt-1 font-bold"
+          className="mt-1 font-bold text-red-500"
         >
           {typeof error === "string" ? error : error.message}
         </div>
@@ -148,9 +140,7 @@ export function NumberField({
   // Update input value when field value changes externally
   useEffect(() => {
     if (field.state.value !== undefined && !Number.isNaN(field.state.value)) {
-      setInputValue(
-        new Intl.NumberFormat(getLocale()).format(field.state.value),
-      )
+      setInputValue(new Intl.NumberFormat(getLocale()).format(field.state.value))
     } else {
       setInputValue("")
     }
@@ -159,8 +149,7 @@ export function NumberField({
   const handleBlur = () => {
     field.handleBlur()
     if (!inputValue) {
-      if (field.state.value !== undefined)
-        field.handleChange(undefined as unknown as number)
+      if (field.state.value !== undefined) field.handleChange(undefined as unknown as number)
       field.handleChange(undefined as unknown as number)
       return
     }
@@ -205,13 +194,7 @@ export function NumberField({
   )
 }
 
-export function DateField({
-  label,
-  isInvalid,
-}: {
-  label: string
-  isInvalid?: boolean
-}) {
+export function DateField({ label, isInvalid }: { label: string; isInvalid?: boolean }) {
   const field = useFieldContext<number>()
   const errors = useStore(field.store, (state) => state.meta.errors)
 
@@ -369,9 +352,7 @@ export function ComboBox({
             className="w-full justify-between"
           >
             {field.state.value
-              ? values.find(
-                  (framework) => framework.value === field.state.value,
-                )?.label
+              ? values.find((framework) => framework.value === field.state.value)?.label
               : placeholder}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
@@ -394,9 +375,7 @@ export function ComboBox({
                     <Check
                       className={cn(
                         "mr-2 h-4 w-4",
-                        field.state.value === framework.value
-                          ? "opacity-100"
-                          : "opacity-0",
+                        field.state.value === framework.value ? "opacity-100" : "opacity-0",
                       )}
                     />
                     {framework.label}
@@ -405,7 +384,7 @@ export function ComboBox({
                 {onCreate && (
                   <CommandItem
                     value="create_new_item_special_value"
-                    className="cursor-pointer bg-accent/20 text-accent-foreground font-semibold"
+                    className="cursor-pointer bg-accent/20 font-semibold text-accent-foreground"
                     onSelect={() => {
                       onCreate()
                       setOpen(false)

@@ -124,12 +124,7 @@ export function SignInWithPassword({
       <div className="flex items-center justify-between">
         <label htmlFor="password">{m.password()}</label>
         {handlePasswordReset && flow === "signIn" ? (
-          <Button
-            className="p-0 h-auto"
-            type="button"
-            variant="link"
-            onClick={handlePasswordReset}
-          >
+          <Button className="h-auto p-0" type="button" variant="link" onClick={handlePasswordReset}>
             {m.forgot_password()}
           </Button>
         ) : null}
@@ -141,9 +136,7 @@ export function SignInWithPassword({
         autoComplete={flow === "signIn" ? "current-password" : "new-password"}
       />
       {flow === "signUp" && passwordRequirements !== null && (
-        <span className="text-zinc-400 font-thin text-sm">
-          {passwordRequirements}
-        </span>
+        <span className="text-sm font-thin text-zinc-400">{passwordRequirements}</span>
       )}
       {flow === "signUp" && customSignUp}
       <input name="flow" value={flow} type="hidden" />

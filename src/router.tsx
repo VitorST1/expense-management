@@ -36,9 +36,7 @@ export function getRouter() {
     defaultNotFoundComponent: () => <NotFound />,
     context: { queryClient, convexQueryClient },
     Wrap: ({ children }) => (
-      <ConvexProvider client={convexQueryClient.convexClient}>
-        {children}
-      </ConvexProvider>
+      <ConvexProvider client={convexQueryClient.convexClient}>{children}</ConvexProvider>
     ),
     scrollRestoration: true,
   })

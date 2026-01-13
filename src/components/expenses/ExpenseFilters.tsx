@@ -1,11 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { MonthPicker } from "@/components/ui/month-picker"
 import { DebouncedInput } from "@/components/ui/debounced-input"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { m } from "@/paraglide/messages"
 import { useQuery } from "@tanstack/react-query"
 import { convexQuery } from "@convex-dev/react-query"
@@ -50,7 +46,7 @@ export function ExpenseFilters({
   const locale = getLocale() === "pt-br" ? ptBR : enUS
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+    <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
       <DebouncedInput
         placeholder={m.search()}
         value=""
@@ -66,9 +62,7 @@ export function ExpenseFilters({
             aria-expanded={openCategory}
             className="w-full justify-between"
           >
-            {category
-              ? categories?.find((c) => c._id === category)?.name
-              : m.select_category()}
+            {category ? categories?.find((c) => c._id === category)?.name : m.select_category()}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
@@ -85,12 +79,7 @@ export function ExpenseFilters({
                     setOpenCategory(false)
                   }}
                 >
-                  <Check
-                    className={cn(
-                      "mr-2 h-4 w-4",
-                      !category ? "opacity-100" : "opacity-0",
-                    )}
-                  />
+                  <Check className={cn("mr-2 h-4 w-4", !category ? "opacity-100" : "opacity-0")} />
                   {m.all_categories()}
                 </CommandItem>
                 {categories?.map((c) => (
@@ -123,7 +112,7 @@ export function ExpenseFilters({
             <Button
               variant={"outline"}
               className={cn(
-                "w-full justify-start text-left font-normal pr-10",
+                "w-full justify-start pr-10 text-left font-normal",
                 !month && "text-muted-foreground",
               )}
             >
@@ -149,7 +138,7 @@ export function ExpenseFilters({
           <Button
             variant="ghost"
             size="icon"
-            className="absolute right-0 top-0 h-full w-10 hover:bg-transparent"
+            className="absolute top-0 right-0 h-full w-10 hover:bg-transparent"
             onClick={(e) => {
               e.stopPropagation()
               setMonth(undefined)

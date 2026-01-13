@@ -8,10 +8,7 @@ import { createServerFn } from "@tanstack/react-start"
 import { ConvexQueryClient } from "@convex-dev/react-query"
 import { getCookie, getRequest } from "@tanstack/react-start/server"
 import { ConvexBetterAuthProvider } from "@convex-dev/better-auth/react"
-import {
-  fetchSession,
-  getCookieName,
-} from "@convex-dev/better-auth/react-start"
+import { fetchSession, getCookieName } from "@convex-dev/better-auth/react-start"
 import { authClient } from "@/lib/auth-client"
 import { getLocale } from "@/paraglide/runtime"
 
@@ -85,7 +82,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body className="flex flex-col min-h-screen bg-zinc-950 dark">
+      <body className="dark flex min-h-screen flex-col bg-zinc-950">
         <ConvexBetterAuthProvider
           client={context.convexQueryClient.convexClient}
           authClient={authClient}

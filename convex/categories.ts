@@ -7,9 +7,7 @@ import { partial } from "convex-helpers/validators"
 import { omit } from "convex-helpers"
 import { paginationOptsValidator } from "convex/server"
 
-const fieldsWithoutUserId = omit(schema.tables.categories.validator.fields, [
-  "userId",
-])
+const fieldsWithoutUserId = omit(schema.tables.categories.validator.fields, ["userId"])
 
 export const get = query({
   args: {},

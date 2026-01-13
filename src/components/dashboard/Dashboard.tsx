@@ -3,13 +3,7 @@ import { convexQuery } from "@convex-dev/react-query"
 import { api } from "convex/_generated/api"
 import { DashboardStats } from "./DashboardStats"
 import { DashboardCharts } from "./DashboardCharts"
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { format } from "date-fns"
 import { m } from "@/paraglide/messages"
 import { DashboardSkeleton } from "./DashboardSkeleton"
@@ -21,28 +15,21 @@ import { enUS, ptBR } from "date-fns/locale"
 import { formatCurrency } from "@/lib/utils.ts"
 
 export default function Dashboard() {
-  const { data: stats, isLoading } = useQuery(
-    convexQuery(api.dashboard.getStats, {}),
-  )
+  const { data: stats, isLoading } = useQuery(convexQuery(api.dashboard.getStats, {}))
 
   if (isLoading || !stats) {
     return <DashboardSkeleton />
   }
 
   const hasExpensesThisMonth = stats.categoryStats.length > 0
-  const avgDaily =
-    stats.weeklyStats.reduce((acc, curr) => acc + curr.amount, 0) / 7
+  const avgDaily = stats.weeklyStats.reduce((acc, curr) => acc + curr.amount, 0) / 7
 
   if (!hasExpensesThisMonth) {
     return (
-      <div className="flex flex-1 flex-col items-center justify-center space-y-4 p-8 pt-6 min-h-[50vh]">
+      <div className="flex min-h-[50vh] flex-1 flex-col items-center justify-center space-y-4 p-8 pt-6">
         <div className="flex flex-col items-center space-y-2 text-center">
-          <h2 className="text-3xl font-bold tracking-tight">
-            {m.dashboard_empty_state_title()}
-          </h2>
-          <p className="text-muted-foreground max-w-[600px]">
-            {m.dashboard_empty_state_desc()}
-          </p>
+          <h2 className="text-3xl font-bold tracking-tight">{m.dashboard_empty_state_title()}</h2>
+          <p className="max-w-[600px] text-muted-foreground">{m.dashboard_empty_state_desc()}</p>
         </div>
         <Button asChild>
           <Link to="/expenses">
@@ -58,10 +45,7 @@ export default function Dashboard() {
     <div className="flex-1 space-y-4 p-8 pt-6">
       <h2 className="text-3xl font-bold tracking-tight">{m.dashboard()}</h2>
       <DashboardStats totalMonth={stats.totalMonth} avgDaily={avgDaily} />
-      <DashboardCharts
-        weeklyStats={stats.weeklyStats}
-        categoryStats={stats.categoryStats}
-      />
+      <DashboardCharts weeklyStats={stats.weeklyStats} categoryStats={stats.categoryStats} />
       <Card>
         <CardHeader>
           <CardTitle>{m.recent_activity()}</CardTitle>
@@ -72,7 +56,7 @@ export default function Dashboard() {
             {stats.recentActivity.map((expense) => (
               <div key={expense._id} className="flex items-center">
                 <div className="space-y-1">
-                  <p className="text-sm font-medium leading-none">
+                  <p className="text-sm leading-none font-medium">
                     {expense.description || m.uncategorized_expense()}
                   </p>
                   <p className="text-sm text-muted-foreground">
@@ -82,15 +66,11 @@ export default function Dashboard() {
                     • {expense.categoryName}
                   </p>
                 </div>
-                <div className="ml-auto font-medium">
-                  -{formatCurrency(expense.amount)}
-                </div>
+                <div className="ml-auto font-medium">-{formatCurrency(expense.amount)}</div>
               </div>
             ))}
             {stats.recentActivity.length === 0 && (
-              <p className="text-sm text-muted-foreground">
-                {m.no_recent_activity()}
-              </p>
+              <p className="text-sm text-muted-foreground">{m.no_recent_activity()}</p>
             )}
           </div>
         </CardContent>

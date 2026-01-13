@@ -7,9 +7,7 @@ import { omit } from "convex-helpers"
 import { partial } from "convex-helpers/validators"
 import { paginationOptsValidator } from "convex/server"
 
-const fieldsWithoutUserId = omit(schema.tables.expenses.validator.fields, [
-  "userId",
-])
+const fieldsWithoutUserId = omit(schema.tables.expenses.validator.fields, ["userId"])
 
 export const get = query({
   args: {},
@@ -46,9 +44,7 @@ export const getPaginated = query({
       const searchResult = await ctx.db
         .query("expenses")
         .withSearchIndex("search_description", (q) => {
-          let qBuilder = q
-            .search("description", args.search!)
-            .eq("userId", user._id)
+          let qBuilder = q.search("description", args.search!).eq("userId", user._id)
           if (args.category) {
             qBuilder = qBuilder.eq("category", args.category)
           }
@@ -71,21 +67,17 @@ export const getPaginated = query({
     let query
 
     if (args.category) {
-      query = ctx.db
-        .query("expenses")
-        .withIndex("by_user_category_date", (q) => {
-          const qBuilder = q
-            .eq("userId", user._id)
-            .eq("category", args.category!)
-          if (args.minDate && args.maxDate) {
-            return qBuilder.gte("date", args.minDate).lte("date", args.maxDate)
-          } else if (args.minDate) {
-            return qBuilder.gte("date", args.minDate)
-          } else if (args.maxDate) {
-            return qBuilder.lte("date", args.maxDate)
-          }
-          return qBuilder
-        })
+      query = ctx.db.query("expenses").withIndex("by_user_category_date", (q) => {
+        const qBuilder = q.eq("userId", user._id).eq("category", args.category!)
+        if (args.minDate && args.maxDate) {
+          return qBuilder.gte("date", args.minDate).lte("date", args.maxDate)
+        } else if (args.minDate) {
+          return qBuilder.gte("date", args.minDate)
+        } else if (args.maxDate) {
+          return qBuilder.lte("date", args.maxDate)
+        }
+        return qBuilder
+      })
     } else {
       query = ctx.db.query("expenses").withIndex("by_user_and_date", (q) => {
         const qBuilder = q.eq("userId", user._id)
@@ -185,15 +177,11 @@ export const deleteExpensesRecursive = internalMutation({
       }
 
       if (expenses.length === limit) {
-        await ctx.scheduler.runAfter(
-          0,
-          internal.expenses.deleteExpensesRecursive,
-          {
-            categoryId: args.categoryId,
-            userId: args.userId,
-            limit,
-          },
-        )
+        await ctx.scheduler.runAfter(0, internal.expenses.deleteExpensesRecursive, {
+          categoryId: args.categoryId,
+          userId: args.userId,
+          limit,
+        })
       }
     }
   },

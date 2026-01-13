@@ -34,12 +34,7 @@ export default function CategoryTable() {
 
   return (
     <div className="space-y-4">
-      <DebouncedInput
-        placeholder={m.search()}
-        value={search}
-        onChange={setSearch}
-        className=""
-      />
+      <DebouncedInput placeholder={m.search()} value={search} onChange={setSearch} className="" />
       <DataTable
         columns={columns({ onDelete: handleDelete })}
         data={results}

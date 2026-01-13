@@ -4,14 +4,7 @@ import { ConvexError } from "convex/values"
 import { startOfMonth, subDays, startOfDay } from "date-fns"
 import { Id } from "./_generated/dataModel"
 
-const COLORS = [
-  "#0088FE",
-  "#00C49F",
-  "#FFBB28",
-  "#FF8042",
-  "#8884d8",
-  "#82ca9d",
-]
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8", "#82ca9d"]
 
 export const getStats = query({
   args: {},
@@ -37,10 +30,7 @@ export const getStats = query({
       .collect()
 
     // Calculate Total Month Spend
-    const totalMonthScale = currentMonthExpenses.reduce(
-      (acc, curr) => acc + curr.amount,
-      0,
-    )
+    const totalMonthScale = currentMonthExpenses.reduce((acc, curr) => acc + curr.amount, 0)
 
     // Calculate Category Breakdown for Month
     const categoryStatsMap = new Map<string, number>()
@@ -51,17 +41,15 @@ export const getStats = query({
 
     // Resolve Category Names
     const categoryStats = await Promise.all(
-      Array.from(categoryStatsMap.entries()).map(
-        async ([categoryId, amount], index) => {
-          const category = await ctx.db.get(categoryId as Id<"categories">)
-          const safeName = category ? category.name : "Unknown"
-          return {
-            name: safeName,
-            amount,
-            fill: COLORS[index % COLORS.length],
-          }
-        },
-      ),
+      Array.from(categoryStatsMap.entries()).map(async ([categoryId, amount], index) => {
+        const category = await ctx.db.get(categoryId as Id<"categories">)
+        const safeName = category ? category.name : "Unknown"
+        return {
+          name: safeName,
+          amount,
+          fill: COLORS[index % COLORS.length],
+        }
+      }),
     )
 
     // Fetch expenses for last 7 days
@@ -69,9 +57,7 @@ export const getStats = query({
 
       .query("expenses")
 
-      .withIndex("by_user_and_date", (q) =>
-        q.eq("userId", user._id).gte("date", startOfLast7Days),
-      )
+      .withIndex("by_user_and_date", (q) => q.eq("userId", user._id).gte("date", startOfLast7Days))
 
       .collect()
 
@@ -86,10 +72,7 @@ export const getStats = query({
     for (const expense of last7DaysExpenses) {
       const dayStart = startOfDay(new Date(expense.date)).getTime().toString()
       if (dailyStatsMap.has(dayStart)) {
-        dailyStatsMap.set(
-          dayStart,
-          dailyStatsMap.get(dayStart)! + expense.amount,
-        )
+        dailyStatsMap.set(dayStart, dailyStatsMap.get(dayStart)! + expense.amount)
       }
     }
 

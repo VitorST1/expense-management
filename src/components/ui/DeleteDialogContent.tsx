@@ -26,10 +26,7 @@ export default function DeleteDialogContent({
       </AlertDialogHeader>
       <AlertDialogFooter>
         <AlertDialogCancel>{m.cancel()}</AlertDialogCancel>
-        <AlertDialogAction
-          onClick={onDelete}
-          className="bg-red-500 hover:bg-red-700 text-zinc-100"
-        >
+        <AlertDialogAction onClick={onDelete} className="bg-red-500 text-zinc-100 hover:bg-red-700">
           {m.delete()}
         </AlertDialogAction>
       </AlertDialogFooter>

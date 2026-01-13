@@ -28,10 +28,7 @@ export const columns = ({
           <Tooltip>
             <TooltipTrigger asChild>
               <EditCategoryDialog category={category}>
-                <Button
-                  className="bg-blue-500 text-zinc-100 hover:bg-blue-700"
-                  size="icon-sm"
-                >
+                <Button className="bg-blue-500 text-zinc-100 hover:bg-blue-700" size="icon-sm">
                   <PencilIcon />
                 </Button>
               </EditCategoryDialog>
@@ -49,10 +46,7 @@ export const columns = ({
             <Tooltip>
               <TooltipTrigger asChild>
                 <AlertDialogTrigger asChild>
-                  <Button
-                    className="bg-red-500 text-zinc-100 hover:bg-red-700"
-                    size="icon-sm"
-                  >
+                  <Button className="bg-red-500 text-zinc-100 hover:bg-red-700" size="icon-sm">
                     <Trash2Icon />
                   </Button>
                 </AlertDialogTrigger>

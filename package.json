@@ -11,12 +11,6 @@
     "format": "oxfmt",
     "prepare": "husky"
   },
-  "lint-staged": {
-    "!(**/_generated/**)/*.{js,ts,jsx,tsx,json}": [
-      "oxlint --fix",
-      "oxfmt --no-error-on-unmatched-pattern"
-    ]
-  },
   "dependencies": {
     "@convex-dev/better-auth": "^0.9.11",
     "@convex-dev/react-query": "0.0.0-alpha.11",
@@ -72,11 +66,17 @@
     "husky": "^9.1.7",
     "jsdom": "^27.4.0",
     "lint-staged": "^16.2.7",
-    "oxfmt": "^0.11.0",
-    "oxlint": "^1.35.0",
+    "oxfmt": "^0.24.0",
+    "oxlint": "^1.39.0",
     "typescript": "^5.9.3",
     "vite": "^7.3.0",
     "vitest": "^3.2.4",
     "web-vitals": "^5.1.0"
+  },
+  "lint-staged": {
+    "!(**/_generated/**)/*.{js,ts,jsx,tsx,json}": [
+      "oxlint --fix",
+      "oxfmt --no-error-on-unmatched-pattern"
+    ]
   }
 }

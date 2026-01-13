@@ -17,19 +17,8 @@ import {
 } from "@/components/ui/table"
 import { Skeleton } from "./skeleton"
 import { Button } from "./button"
-import {
-  ChevronLeft,
-  ChevronRight,
-  ChevronsLeft,
-  ChevronsRight,
-} from "lucide-react"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "./select"
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select"
 import { m } from "@/paraglide/messages"
 import { useEffect, useRef } from "react"
 
@@ -79,13 +68,7 @@ export function DataTable<TData, TValue>({
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (
-          entries[0].isIntersecting &&
-          hasMore &&
-          !isLoadingMore &&
-          !isLoading &&
-          onLoadMore
-        ) {
+        if (entries[0].isIntersecting && hasMore && !isLoadingMore && !isLoading && onLoadMore) {
           onLoadMore()
         }
       },
@@ -112,16 +95,10 @@ export function DataTable<TData, TValue>({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead
-                      key={header.id}
-                      className={header.column.columnDef.meta?.className}
-                    >
+                    <TableHead key={header.id} className={header.column.columnDef.meta?.className}>
                       {header.isPlaceholder
                         ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
+                        : flexRender(header.column.columnDef.header, header.getContext())}
                     </TableHead>
                   )
                 })}
@@ -140,16 +117,10 @@ export function DataTable<TData, TValue>({
             ) : table.getRowModel().rows?.length ? (
               <>
                 {table.getRowModel().rows.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    data-state={row.getIsSelected() && "selected"}
-                  >
+                  <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
                     {row.getVisibleCells().map((cell) => (
                       <TableCell key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext(),
-                        )}
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </TableCell>
                     ))}
                   </TableRow>
@@ -157,17 +128,14 @@ export function DataTable<TData, TValue>({
                 {/* Loader for infinite scroll */}
                 {onLoadMore && (
                   <TableRow ref={observerTarget} className="border-0">
-                    <TableCell
-                      colSpan={columns.length}
-                      className="h-10 text-center p-2"
-                    >
+                    <TableCell colSpan={columns.length} className="h-10 p-2 text-center">
                       {isLoadingMore && (
-                        <div className="flex justify-center items-center py-2 animate-pulse text-muted-foreground text-sm">
+                        <div className="flex animate-pulse items-center justify-center py-2 text-sm text-muted-foreground">
                           {m.loading_more()}
                         </div>
                       )}
                       {!hasMore && data.length > 0 && (
-                        <div className="text-xs text-muted-foreground py-2">
+                        <div className="py-2 text-xs text-muted-foreground">
                           {m.no_more_results()}
                         </div>
                       )}
@@ -177,10 +145,7 @@ export function DataTable<TData, TValue>({
               </>
             ) : (
               <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
+                <TableCell colSpan={columns.length} className="h-24 text-center">
                   {m.no_results_found()}
                 </TableCell>
               </TableRow>
@@ -193,12 +158,9 @@ export function DataTable<TData, TValue>({
           <div className="flex-1 text-sm text-muted-foreground">
             {m.showing_range_of_total({
               start:
-                table.getState().pagination.pageIndex *
-                  table.getState().pagination.pageSize +
-                1,
+                table.getState().pagination.pageIndex * table.getState().pagination.pageSize + 1,
               end: Math.min(
-                (table.getState().pagination.pageIndex + 1) *
-                  table.getState().pagination.pageSize,
+                (table.getState().pagination.pageIndex + 1) * table.getState().pagination.pageSize,
                 rowCount || 0,
               ),
               total: rowCount || 0,
@@ -214,9 +176,7 @@ export function DataTable<TData, TValue>({
                 }}
               >
                 <SelectTrigger className="h-8 w-[70px]">
-                  <SelectValue
-                    placeholder={table.getState().pagination.pageSize}
-                  />
+                  <SelectValue placeholder={table.getState().pagination.pageSize} />
                 </SelectTrigger>
                 <SelectContent side="top">
                   {[10, 20, 30, 40, 50].map((pageSize) => (

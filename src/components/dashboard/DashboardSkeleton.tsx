@@ -16,7 +16,7 @@ export function DashboardSkeleton() {
               <Skeleton className="h-4 w-4 rounded-full" />
             </CardHeader>
             <CardContent>
-              <Skeleton className="h-8 w-24 mb-1" />
+              <Skeleton className="mb-1 h-8 w-24" />
               <Skeleton className="h-3 w-32" />
             </CardContent>
           </Card>
@@ -25,7 +25,7 @@ export function DashboardSkeleton() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
         <Card className="col-span-4">
           <CardHeader>
-            <Skeleton className="h-6 w-32 mb-2" />
+            <Skeleton className="mb-2 h-6 w-32" />
             <Skeleton className="h-4 w-48" />
           </CardHeader>
           <CardContent>
@@ -34,7 +34,7 @@ export function DashboardSkeleton() {
         </Card>
         <Card className="col-span-4 md:col-span-3">
           <CardHeader>
-            <Skeleton className="h-6 w-32 mb-2" />
+            <Skeleton className="mb-2 h-6 w-32" />
             <Skeleton className="h-4 w-48" />
           </CardHeader>
           <CardContent>
@@ -44,7 +44,7 @@ export function DashboardSkeleton() {
       </div>
       <Card>
         <CardHeader>
-          <Skeleton className="h-6 w-32 mb-2" />
+          <Skeleton className="mb-2 h-6 w-32" />
           <Skeleton className="h-4 w-48" />
         </CardHeader>
         <CardContent>

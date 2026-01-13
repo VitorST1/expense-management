@@ -79,8 +79,7 @@ export default function AddCategoryDialog({
           <div className="space-y-4">
             <form.AppField name="name">
               {(field) => {
-                const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid
+                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
 
                 return (
                   <field.TextField
@@ -94,11 +93,7 @@ export default function AddCategoryDialog({
             </form.AppField>
           </div>
           <DialogFooter className="mt-6">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => onOpenChange(false)}
-            >
+            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
               {m.cancel()}
             </Button>
             <form.AppForm>

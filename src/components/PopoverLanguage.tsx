@@ -1,8 +1,4 @@
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import {
   Command,
   CommandEmpty,
@@ -41,11 +37,7 @@ export default function PopoverLanguage() {
           <LanguagesIcon aria-label={m.language_search()} />
         </Button>
       </PopoverTrigger>
-      <PopoverContent
-        className="dark w-52 p-0"
-        align="start"
-        aria-label={m.language_search()}
-      >
+      <PopoverContent className="dark w-52 p-0" align="start" aria-label={m.language_search()}>
         <Command className="dark">
           <CommandInput placeholder={m.language_search()} />
           <CommandList>
@@ -64,9 +56,7 @@ export default function PopoverLanguage() {
                   <CheckIcon
                     className={cn(
                       "ml-auto h-4 w-4",
-                      currentLanguage === language.value
-                        ? "opacity-100"
-                        : "opacity-0",
+                      currentLanguage === language.value ? "opacity-100" : "opacity-0",
                     )}
                   />
                 </CommandItem>

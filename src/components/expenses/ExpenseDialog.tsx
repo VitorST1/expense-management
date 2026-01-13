@@ -26,17 +26,12 @@ interface ExpenseDialogProps {
   children?: ReactNode
 }
 
-export default function ExpenseDialog({
-  expense,
-  children,
-}: ExpenseDialogProps) {
+export default function ExpenseDialog({ expense, children }: ExpenseDialogProps) {
   const [open, setOpen] = useState(false)
   const [addCategoryOpen, setAddCategoryOpen] = useState(false)
   const isEdit = !!expense
 
-  const { data: categories } = useSuspenseQuery(
-    convexQuery(api.categories.get, {}),
-  )
+  const { data: categories } = useSuspenseQuery(convexQuery(api.categories.get, {}))
 
   const { mutateAsync: createMutate } = useMutation({
     mutationFn: useConvexMutation(api.expenses.create),
@@ -114,9 +109,7 @@ export default function ExpenseDialog({
         </DialogTrigger>
         <DialogContent aria-describedby={undefined}>
           <DialogHeader className="sr-only">
-            <DialogTitle>
-              {isEdit ? m.edit_expense() : m.add_expense()}
-            </DialogTitle>
+            <DialogTitle>{isEdit ? m.edit_expense() : m.add_expense()}</DialogTitle>
           </DialogHeader>
           <form
             onSubmit={(e) => {
@@ -142,8 +135,7 @@ export default function ExpenseDialog({
               </form.AppField>
               <form.AppField name="description">
                 {(field) => {
-                  const isInvalid =
-                    field.state.meta.isTouched && !field.state.meta.isValid
+                  const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
 
                   return (
                     <field.TextField
@@ -157,32 +149,19 @@ export default function ExpenseDialog({
               </form.AppField>
               <form.AppField name="amount">
                 {(field) => {
-                  const isInvalid =
-                    field.state.meta.isTouched && !field.state.meta.isValid
-                  return (
-                    <field.NumberField
-                      label={m.amount()}
-                      isInvalid={isInvalid}
-                    />
-                  )
+                  const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+                  return <field.NumberField label={m.amount()} isInvalid={isInvalid} />
                 }}
               </form.AppField>
               <form.AppField name="date">
                 {(field) => {
-                  const isInvalid =
-                    field.state.meta.isTouched && !field.state.meta.isValid
-                  return (
-                    <field.DateField label={m.date()} isInvalid={isInvalid} />
-                  )
+                  const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+                  return <field.DateField label={m.date()} isInvalid={isInvalid} />
                 }}
               </form.AppField>
             </div>
             <DialogFooter className="mt-6">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => setOpen(false)}
-              >
+              <Button type="button" variant="outline" onClick={() => setOpen(false)}>
                 {m.cancel()}
               </Button>
               <form.AppForm>

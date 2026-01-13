@@ -2,8 +2,7 @@ import { Input } from "@/components/ui/input"
 import { useDebounce } from "@/hooks/use-debounce"
 import { useEffect, useState } from "react"
 
-interface DebouncedInputProps
-  extends Omit<React.ComponentProps<typeof Input>, "onChange"> {
+interface DebouncedInputProps extends Omit<React.ComponentProps<typeof Input>, "onChange"> {
   value: string
   onChange: (value: string) => void
   debounce?: number
@@ -22,11 +21,5 @@ export function DebouncedInput({
     onChange(debouncedValue)
   }, [debouncedValue, onChange])
 
-  return (
-    <Input
-      {...props}
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-    />
-  )
+  return <Input {...props} value={value} onChange={(e) => setValue(e.target.value)} />
 }

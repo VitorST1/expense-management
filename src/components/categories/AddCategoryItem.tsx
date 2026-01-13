@@ -1,10 +1,4 @@
-import {
-  Item,
-  ItemActions,
-  ItemContent,
-  ItemDescription,
-  ItemTitle,
-} from "@/components/ui/item"
+import { Item, ItemActions, ItemContent, ItemDescription, ItemTitle } from "@/components/ui/item"
 import { useAppForm } from "@/hooks/form"
 import { getInternationalizationMessageFromKey } from "@/lib/utils"
 import { m } from "@/paraglide/messages"
@@ -64,8 +58,7 @@ export default function AddCategoryItem() {
           <ItemTitle>
             <form.AppField name="name">
               {(field) => {
-                const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid
+                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
 
                 return (
                   <field.TextField

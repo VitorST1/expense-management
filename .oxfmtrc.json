@@ -1,7 +1,12 @@
 {
-    "semi": false,
-    "bracketSameLine": false,
-    "ignorePatterns": [
-        "_generated"
-    ]
+  "semi": false,
+  "bracketSameLine": false,
+  "ignorePatterns": ["_generated"],
+  "experimentalTailwindcss": {
+    "stylesheet": "./src/styles.css",
+    "attributes": ["class", "className"],
+    "functions": ["clsx", "cn"],
+    "preserveDuplicates": false,
+    "preserveWhitespace": false
+  }
 }

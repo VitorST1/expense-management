@@ -1,11 +1,5 @@
 import { m } from "@/paraglide/messages.js"
-import {
-  Item,
-  ItemActions,
-  ItemContent,
-  ItemDescription,
-  ItemTitle,
-} from "../ui/item.tsx"
+import { Item, ItemActions, ItemContent, ItemDescription, ItemTitle } from "../ui/item.tsx"
 import ExpenseDialog from "./ExpenseDialog.tsx"
 
 export default function ExpenseItem() {

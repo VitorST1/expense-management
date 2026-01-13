@@ -13,9 +13,7 @@ import { useState } from "react"
 
 export default function ExpenseTable() {
   const [searchQuery, setSearchQuery] = useState("")
-  const [category, setCategory] = useState<Id<"categories"> | undefined>(
-    undefined,
-  )
+  const [category, setCategory] = useState<Id<"categories"> | undefined>(undefined)
   const [month, setMonth] = useState<Date | undefined>(undefined)
 
   const { results, status, loadMore, isLoading } = usePaginatedQuery(

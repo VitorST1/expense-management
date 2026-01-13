@@ -25,10 +25,7 @@ interface EditCategoryDialogProps {
   children: ReactNode
 }
 
-export default function EditCategoryDialog({
-  category,
-  children,
-}: EditCategoryDialogProps) {
+export default function EditCategoryDialog({ category, children }: EditCategoryDialogProps) {
   const { mutateAsync } = useMutation({
     mutationFn: useConvexMutation(api.categories.update),
   })
@@ -78,8 +75,7 @@ export default function EditCategoryDialog({
           <div className="space-y-4">
             <form.AppField name="name">
               {(field) => {
-                const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid
+                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
 
                 return (
                   <field.TextField
