@@ -47,7 +47,7 @@ export default function PopoverLanguage() {
                 <CommandItem
                   key={language.value}
                   value={language.value}
-                  keywords={[language.label]}
+                  keywords={language.label ? [language.label] : []}
                   onSelect={(currentValue: string) => {
                     void setLocale(currentValue as (typeof locales)[number])
                   }}

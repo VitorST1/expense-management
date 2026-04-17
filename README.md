@@ -23,15 +23,31 @@ To run this application locally:
 
     (Or manually copy the file and fill in the required values)
 
-2.  Install dependencies and run:
+2.  Set the app origin in Convex's environment variables:
 
     ```bash
+    # Use the same origin you open in the browser
+    vp exec convex env set SITE_URL http://localhost:3000
+    ```
+
+    For production, set the production app origin instead:
+
+    ```bash
+    vp exec convex env set --prod SITE_URL https://your-app.example.com
+    ```
+
+    `CONVEX_SITE_URL` is provided by Convex, so only `SITE_URL` needs to be set with `convex env set`.
+
+3.  Install dependencies and run:
+
+    ```bash
+    vp install
+
     # Run the backend
-    pnpm dlx convex dev
+    vp exec convex dev
 
     # Run the frontend (in a separate terminal)
-    pnpm install
-    pnpm dev
+    vp dev --port 3000
     ```
 
 ## Technologies

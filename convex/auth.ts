@@ -33,6 +33,7 @@ export const createAuth = (
       convex(),
     ],
     trustedOrigins: [siteUrl],
+    secret: process.env.BETTER_AUTH_SECRET,
   })
 }
 
